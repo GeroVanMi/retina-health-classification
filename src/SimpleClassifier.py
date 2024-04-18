@@ -1,23 +1,23 @@
 from torch.nn import Flatten, Linear, MaxPool2d, Module, ReLU, Sequential
 
-from utils.layers import convolution_layer
+from utils.layers import double_convolution_layer
 
 
 class SimpleClassifier(Module):
     def __init__(self):
         super().__init__()
         self.classifier = Sequential(
-            convolution_layer(3, 16),
+            double_convolution_layer(3, 16),
             MaxPool2d(4),
-            convolution_layer(16, 32),
+            double_convolution_layer(16, 32),
             MaxPool2d(4),
-            convolution_layer(32, 64),
+            double_convolution_layer(32, 64),
             MaxPool2d(2),
-            convolution_layer(64, 128),
+            double_convolution_layer(64, 128),
             MaxPool2d(2),
-            convolution_layer(128, 256),
+            double_convolution_layer(128, 256),
             MaxPool2d(2),
-            convolution_layer(256, 512),
+            double_convolution_layer(256, 512),
             Flatten(),
             Linear(8192, 4064),
             ReLU(),
