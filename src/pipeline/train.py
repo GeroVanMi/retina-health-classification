@@ -3,6 +3,7 @@ import torch
 from torch.nn import CrossEntropyLoss
 from torch.optim import Optimizer
 from torch.utils.data import DataLoader
+from torchmetrics.classification import Accuracy, F1Score
 
 
 def train_epoch(
@@ -14,17 +15,30 @@ def train_epoch(
     dev_mode=False,
 ):
     model.train()
-    total_data_length = len(data_loader)
-    epoch_loss = []
-    # TODO: Adjust this to the classification task!
-    for batch_index, (image, label) in enumerate(data_loader):
 
-        image = torch.Tensor.type(image, dtype=torch.float32)
-        image = image.to(device)
-        prediction = model(image)
+    running_loss = 0
+    running_accuracy = 0
+    running_f1 = 0
+    count = 0
 
-        loss = loss_function(prediction, label)
-        epoch_loss.append(loss.item())
+    for images, labels in data_loader:
+        count += 1
+
+        images = images.to(device)
+        predictions = model(images)
+
+        labels = labels.to(device)
+
+        loss = loss_function(predictions, labels)
+
+        compute_accuracy = Accuracy(task="multiclass", num_classes=4).to(device)
+        compute_f1 = F1Score(task="multiclass", num_classes=4).to(device)
+        accuracies = compute_accuracy(predictions, labels)
+        f1_scores = compute_f1(predictions, labels)
+
+        running_loss += loss.item()
+        running_accuracy += accuracies
+        running_f1 += f1_scores
 
         # What do these lines really do? This would be interesting to know.
         # Obviously I know that they apply the backpropagation, but what does that mean on a technical level?
@@ -32,10 +46,11 @@ def train_epoch(
         optimizer.step()
         optimizer.zero_grad()
 
-        print(f"{batch_index + 1}/{total_data_length} Training Loss: {loss.item()}")
-
         if dev_mode:
             print(f"Training Loss: {loss.item()}")
             break
 
-    return np.mean(epoch_loss)
+    epoch_loss = running_loss / count
+    epoch_accuracy = running_accuracy / count
+    epoch_f1 = running_f1 / count
+    return epoch_loss, epoch_accuracy, epoch_f1

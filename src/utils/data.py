@@ -9,7 +9,7 @@ def create_train_test_loaders(
 ) -> tuple[DataLoader, DataLoader]:
     image_transform = torchvision.transforms.Compose(
         [
-            torchvision.transforms.Resize((224, 224)),  # Resize the image to 224x224
+            torchvision.transforms.Resize((512, 512)),
             torchvision.transforms.ToTensor(),  # Convert the image to a pytorch tensor
         ]
     )

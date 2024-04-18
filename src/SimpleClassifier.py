@@ -1,5 +1,4 @@
-from torch.nn import (Flatten, Linear, MaxPool2d, Module, ReLU, Sequential,
-                      Softmax)
+from torch.nn import Flatten, Linear, MaxPool2d, Module, ReLU, Sequential
 
 from utils.layers import convolution_layer
 
@@ -9,9 +8,9 @@ class SimpleClassifier(Module):
         super().__init__()
         self.classifier = Sequential(
             convolution_layer(3, 16),
-            MaxPool2d(2),
+            MaxPool2d(4),
             convolution_layer(16, 32),
-            MaxPool2d(2),
+            MaxPool2d(4),
             convolution_layer(32, 64),
             MaxPool2d(2),
             convolution_layer(64, 128),
@@ -20,9 +19,11 @@ class SimpleClassifier(Module):
             MaxPool2d(2),
             convolution_layer(256, 512),
             Flatten(),
-            Linear(25088, 512),
+            Linear(8192, 4064),
             ReLU(),
-            Linear(512, 4),
+            Linear(4064, 256),
+            ReLU(),
+            Linear(256, 4),
         )
 
     def forward(self, x):

@@ -4,3 +4,4 @@ datasets
 torchmetrics
 torch
 torchvision
+lightning

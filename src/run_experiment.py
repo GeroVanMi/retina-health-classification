@@ -1,11 +1,11 @@
 import time
 
 import torch
-import wandb
 from torch.nn import CrossEntropyLoss
 
+import wandb
+from pipeline.evaluate import evaluate_epoch
 from pipeline.train import train_epoch
-# from pipeline.evaluate import evaluate_epoch
 from SimpleClassifier import SimpleClassifier
 from utils.data import create_train_test_loaders
 from utils.model import initialize_model, save_torch_model
@@ -13,13 +13,13 @@ from utils.model import initialize_model, save_torch_model
 DATA_PATH = "../data/Eyes/"
 
 NUMBER_OF_EPOCHS = 20
-BATCH_SIZE = 32
-LEARNING_RATE = 0.001
+BATCH_SIZE = 64
+LEARNING_RATE = 1e-5
 
-EXPERIMENT_NAME = "Testing"
-PROJECT_NAME = "Retinal Health Classification"
-ENTITY_NAME = ""
-ARCHITECTURE_NAME = "None"
+EXPERIMENT_NAME = "Larger Images"
+PROJECT_NAME = "retina-health-classification"
+ENTITY_NAME = "gerovanmi"
+ARCHITECTURE_NAME = "U-NetEncoder"  # Must not contain special characters (except "-")
 DATASET_NAME = "Medical Scan Classification Dataset"
 
 MODEL_SAVE_PATH = f"../models/{ARCHITECTURE_NAME}_{int(time.time())}.pt"
@@ -47,50 +47,50 @@ def run_experiment():
     batch_size = BATCH_SIZE
     if number_of_gpus > 1:
         print("Using ", number_of_gpus, "GPUs.")
-        batch_size = 64
+        batch_size = 512
     input("Confirm with Enter or cancel with Ctrl-C:")
 
-    # TODO: Configure WandB project!
-    # wandb.init(
-    #     project=PROJECT_NAME,
-    #     entity=ENTITY_NAME,
-    #     name=EXPERIMENT_NAME,
-    #     config={
-    #         "learning_rate": LEARNING_RATE,
-    #         "architecture": ARCHITECTURE_NAME,
-    #         "batch_size": batch_size,
-    #         "dataset": DATASET_NAME,
-    #         "epochs": NUMBER_OF_EPOCHS,
-    #         "dev_mode": DEV_MODE,
-    #         "device": device,
-    #     },
-    # )
+    wandb.init(
+        project=PROJECT_NAME,
+        entity=ENTITY_NAME,
+        name=EXPERIMENT_NAME,
+        config={
+            "learning_rate": LEARNING_RATE,
+            "architecture": ARCHITECTURE_NAME,
+            "batch_size": batch_size,
+            "dataset": DATASET_NAME,
+            "epochs": NUMBER_OF_EPOCHS,
+            "dev_mode": DEV_MODE,
+        },
+    )
     train_loader, test_loader = create_train_test_loaders(DATA_PATH, batch_size)
     model = initialize_model(SimpleClassifier, device)
 
     loss_function = CrossEntropyLoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE)
+    optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
     for epoch in range(NUMBER_OF_EPOCHS):
         print(f"#### EPOCH {epoch} ####")
-        train_loss = train_epoch(
+        train_loss, train_accuracy, train_f1 = train_epoch(
             model, train_loader, loss_function, optimizer, device, DEV_MODE
         )
-        print(train_loss)
-        # test_loss, test_jaccard = evaluate_epoch(
-        #     model, test_loader, loss_function, device, DEV_MODE
-        # )
+        test_loss, test_accuracy, test_f1 = evaluate_epoch(
+            model, test_loader, loss_function, device, DEV_MODE
+        )
 
-        # wandb.log(
-        #     {
-        #         "Training Loss": train_loss,
-        #         "Training Jaccard Index": train_jaccard,
-        #         "Testing Loss": test_loss,
-        #         "Testing Jaccard Index": test_jaccard,
-        #     }
-        # )
+        wandb.log(
+            {
+                "Training Loss": train_loss,
+                "Training Accuracy": train_accuracy,
+                "Training F1-Score": train_f1,
+                "Testing Loss": test_loss,
+                "Testing Accuracy": test_accuracy,
+                "Testing F1-Score": test_f1,
+            }
+        )
 
-    # save_torch_model(model, MODEL_SAVE_PATH, ARCHITECTURE_NAME)
+    if not DEV_MODE:
+        save_torch_model(model, MODEL_SAVE_PATH, ARCHITECTURE_NAME)
 
 
 if __name__ == "__main__":

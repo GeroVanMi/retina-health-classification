@@ -1,6 +1,7 @@
 import torch
-import wandb
 from torch.nn import DataParallel
+
+import wandb
 
 
 def initialize_model(ModelClass, device):
