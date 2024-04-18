@@ -9,7 +9,7 @@ import wandb
 from pipeline.evaluate import evaluate_epoch
 from pipeline.train import train_epoch
 from SimpleClassifier import SimpleClassifier
-from utils.data import create_train_test_loaders
+from utils.data import create_train_validation_loaders
 from utils.model import initialize_model, save_torch_model
 from utils.quality_of_life import preflight_check
 
@@ -39,7 +39,7 @@ if DEV_MODE:
 def train_for_one_epoch(
     model: Module,
     train_loader: DataLoader,
-    test_loader: DataLoader,
+    validation_loader: DataLoader,
     loss_function: CrossEntropyLoss,
     optimizer: Optimizer,
     device: str,
@@ -47,8 +47,8 @@ def train_for_one_epoch(
     train_loss, train_accuracy, train_f1 = train_epoch(
         model, train_loader, loss_function, optimizer, device, DEV_MODE
     )
-    test_loss, test_accuracy, test_f1 = evaluate_epoch(
-        model, test_loader, loss_function, device, DEV_MODE
+    validation_loss, validation_accuracy, validation_f1 = evaluate_epoch(
+        model, validation_loader, loss_function, device, DEV_MODE
     )
 
     wandb.log(
@@ -56,9 +56,9 @@ def train_for_one_epoch(
             "Training Loss": train_loss,
             "Training Accuracy": train_accuracy,
             "Training F1-Score": train_f1,
-            "Testing Loss": test_loss,
-            "Testing Accuracy": test_accuracy,
-            "Testing F1-Score": test_f1,
+            "Testing Loss": validation_loss,
+            "Testing Accuracy": validation_accuracy,
+            "Testing F1-Score": validation_f1,
         }
     )
 
@@ -97,7 +97,9 @@ def run_experiment():
     )
 
     # Load Data and Initialize Model, Loss Function & Optimizer
-    train_loader, test_loader = create_train_test_loaders(DATA_PATH, batch_size)
+    train_loader, validation_loader = create_train_validation_loaders(
+        DATA_PATH, batch_size
+    )
     model = initialize_model(SimpleClassifier, device)
 
     loss_function = CrossEntropyLoss()
@@ -109,7 +111,7 @@ def run_experiment():
         train_for_one_epoch(
             model,
             train_loader,
-            test_loader,
+            validation_loader,
             loss_function,
             optimizer,
             device,

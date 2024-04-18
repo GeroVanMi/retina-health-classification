@@ -39,7 +39,7 @@ def evaluate_epoch(
             running_f1 += f1_scores
 
             if dev_mode:
-                print(f"Test Loss: {loss.item()}")
+                print(f"Validation Loss: {loss.item()}")
                 break
 
     epoch_loss = running_loss / count
