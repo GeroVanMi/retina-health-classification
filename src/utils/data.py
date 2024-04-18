@@ -29,5 +29,5 @@ def create_train_test_loaders(
 
 if __name__ == "__main__":
     train_dataloader, test_loader = create_train_test_loaders("../../data/Eyes")
-    batch = next(iter(train_dataloader))
-    print(batch[0].shape)
+    batch, labels = next(iter(train_dataloader))
+    print(labels)
