@@ -36,34 +36,39 @@ TODO
 
 ## Data Preprocessing
 Um die Bilder für das Training des CNN vorzubereiten, werden verschiedene Preprocessing-Schritte durchgeführt:
-1. Größenanpassung der Bilder auf einheitliche Dimensionen.
-2. Normalisierung der Pixelwerte.
-3. Data Augmentation, um die Robustheit des Modells zu verbessern.
+1. **Resizing the images to uniform dimensions:**
 
-*  D'Bilder werded glade und uf 512x512 pixel resized (die meiste sind scho uf dere Uflösig, aber es hett e paar wo no grösser sind). Ich duen sie uf die 512x512 resize, well denn bi de meiste Bilder kei Informatione verlore göhnd, ohni eppis z'verzerre.
-* Nachher werded d'Bilder in Training und Validation Split (80% => 3374 Train, 20% => 843 Validation) uufteilt
+*  The images are loaded first. Most of them are available with a resolution of 512 x 512 pixels. Those that are larger will be resized to 512 x 512. This ensures that no important information is lost and that the images are not distorted despite the reduction in resolution.
+
+1. **Splitting data:**
+* The data is split into training and validation data with a split of 80% training data (3374 images) and 20% validation data (843 images).
 
 ## Model Architecture
 Das CNN-Modell besteht aus mehreren Schichten:
 1. **Convolutional Layer:** 
-2. **Pooling Layer:**
-3. **Fully Connected Layer:**
+* 6 layers with 2 convolutions, resulting in a total of 12 convolutions
+* This increases the number of channels after each convolution layer.
+* The increase in the number of channels corresponds to x2: 3 (RGB) => 16 => 32 => 64 => 128 => 256 => 512
 
-* Für d'Predictions han ich jetzt 6 layers à 2 Convolutions gno = 12 total convolutions 
-Nach jedem Layer wird d'Azahl Channels vergrösseret und es Max-Pooling gmacht, d.h. die tüüfere Layers hend es grösseres receptive field (= sie gshend meh vom Originale Bild) 
-D'Azahl Channels isch fascht immer x2: 3 (RGB) => 16 => 32 => 64 => 128 => 256 => 512
-Mir mached nach de erschte zwei Layer es MaxPooling mit Kernel 4 (das macht s'Bild schnell chliiner, süsch würdeds nöd in Memory passe / langsam trainiere). Nachher sind d'MaxPooling nur no mit Kernel 2 damit nöd zvill Information verlore gaht
-* Am Schluss hetts no es Fully Connected Neural Network mit 8192 Input Neurone => 4064 Hidden => 256 Hidden => 4 Output
+2. **Pooling Layer:**
+* Max pooling is carried out after each convolution layer. This means that deeper layers have a larger receptive field and therefore contain more of the original image.
+* After the first two convolution layers, max pooling is performed with kernel size 4. This reduces the size of the image so that the training phase does not take too long and the images fit into memory.
+* After the other layers, max pooling is performed with kernel size 2 so that not too much information is lost.
+
+3. **Fully Connected Layer:**
+* Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
 
 ## Model Training
+* NUMBER_OF_EPOCHS = 20
+* BATCH_SIZE = 64
+* LEARNING_RATE = 1e-5
 
 ## Model Performance
-Die Leistung des Modells wird anhand der Accuracy und weiterer Metriken wie Precision, Recall und F1-Score evaluiert. Diese Metriken helfen uns zu verstehen, wie gut unser Modell die verschiedenen Krankheiten identifizieren kann.
-
-5. Evaluiere düend mir mit Multiclass Accuracy (vo Torchmetrics), well d'Klasse relativ balanced sind (ich han au de F1-Score no agluegt, aber er isch eigentlich immer identisch zu de Accuracy) 
-6. Schlussendlich speicherts s'Modell uf W&B damit mer es chönnted abelade & wiederverwende (z.B. zum neue Predictions z'mache wo mer no kei Labels hett)
+* The performance of the model is evaluated with Multiclass Accuracy (from Torchmetrics), as the four classes are sufficiently balanced.
+* Finally, the model is saved on Weights & Biases so that it can be used for predictions of unlabeled images.
 
 ## Results
+TODO
 
 ## Discussion
 TODO
