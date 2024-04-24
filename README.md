@@ -3,17 +3,20 @@
 ### Data Science in Health
 #### Gérome Laurin Meyer | Rebekka von Wartburg
 #### May 24, 2024
-![Titelbild](pfad/zum/bild.jpg) [1]
+![Titelbild](img/title_img.jpeg) [1]
 
 ---
 
 ## Introduction
 In this project, a Convolutional Neural Network (CNN) is being developed with the aim of recognizing and classifying three important eye diseases: Cataract, Retinopathy and Glaucoma. These diseases can have serious effects on vision and early detection is crucial for effective treatment.
 
-![Bild normales Auge](pfad/zum/bild.jpg)
-![Bild Cataract](pfad/zum/bild.jpg)
-![Bild Retinopathy](pfad/zum/bild.jpg)
-![Bild Glaucoma](pfad/zum/bild.jpg)
+
+| Normal Eye | Cataract | Retinopathy | Glaucoma |
+|------------|----------|-------------|----------|
+| ![Normal Eye](img/normal_eye.png) | ![Cataract](img/cataract.png) | ![Retinopathy](img/retinopathy.png) | ![Glaucoma](img/glaucoma.png) | 
+[2]
+
+
 
 ## Install Guide
 TODO
@@ -69,4 +72,6 @@ TODO
 
 ## Sources
 [1] https://scitechdaily.com/unlocking-the-future-of-health-predicting-disease-with-retinal-imaging-and-genetics/
+
+[2] https://atlanticeyeinstitute.com/diabetic-eye-issues-5-ways-diabetes-impacts-vision/
 
