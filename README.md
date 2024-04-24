@@ -8,11 +8,28 @@
 ---
 
 ## Introduction
-In this project, a Convolutional Neural Network (CNN) is being developed with the aim of recognizing and classifying three important eye diseases: Cataract, Retinopathy and Glaucoma. These diseases can have serious effects on vision and early detection is crucial for effective treatment.
+In this project, the application of a Convolutional Neural Networks (CNNs) classification of three major eye diseases - **cataract**, **retinopathy** and **glaucoma** - is investigated. These diseases are among the most common causes of visual impairment and blindness. Early detection and diagnosis can slow down the progression of the disease, preserve vision and generally improve the quality of life of those affected.
 
 
-| Normal Eye | Cataract | Retinopathy | Glaucoma |
-|------------|----------|-------------|----------|
+* **Cataract:**
+A cataract is where the lens of the eye becomes opaque, clouding and losing the ability to focus. It is often associated with ageing and can also be caused by factors such as diabetes, smoking and prolonged exposure to sunlight.
+
+* **Glaucoma:**
+Glaucoma occurs when the fluid pressure inside the eye rises above normal levels. This increased pressure can damage the optic nerve, which is responsible for transmitting visual information from the eye to the brain. If left untreated, glaucoma can lead to loss of vision or even blindness.
+
+* **Retinopathy:**
+Retinopathy is a disease of the retina, the light-sensitive tissue at the back of the eye. It is often associated with diabetes and can damage the blood vessels in the retina, which can result in vision loss or even blindness if left untreated.
+
+
+
+
+
+
+These diseases can have serious effects on vision and early detection is crucial for effective treatment.
+
+
+| Normal Eye  | Cataract    | Retinopathy | Glaucoma    |
+|-------------|-------------|-------------|-------------|
 | ![Normal Eye](img/normal_eye.png) | ![Cataract](img/cataract.png) | ![Retinopathy](img/retinopathy.png) | ![Glaucoma](img/glaucoma.png) | 
 [2]
 
