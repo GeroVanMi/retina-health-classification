@@ -8,32 +8,42 @@
 ---
 
 ## Introduction
-In this project, the application of a Convolutional Neural Networks (CNNs) classification of three major eye diseases - **cataract**, **retinopathy** and **glaucoma** - is investigated. These diseases are among the most common causes of visual impairment and blindness. Early detection and diagnosis can slow down the progression of the disease, preserve vision and generally improve the quality of life of those affected.
+Over two billion people worldwide suffer from vision loss due to an eye disease [2]. Some of these losses can be irreversible. Timely intervention or early detection can slow down the damage process, preserve vision and generally improve the quality of life of those affected.
+However, early detection of eye diseases is difficult, as they are often asymptomatic in the early stages. Ophthalmologists, specialists in the detection of eye diseases, use various diagnostic instruments to examine eye diseases, such as slit lamps, tonometry, perimetry, gonioscopy, pachymetry and fundoscopy.
+
+Funduscopy offers a simple and cost-effective screening solution. It uses a camera to illuminate the pupil of the eye, collects the reflected light from the retinal surface and captures it using imaging optics to create a retinal image on a detector screen. This creates a 2D image of the retina.
+
+In this project, the application of a Convolutional Neural Networks (CNNs) on funduscopy images for the classification of three major eye diseases - **cataract**, **glaucoma** and **retinopathy** - is investigated. These diseases are among the most common causes of visual impairment and blindness [4]. 
+
+**Normal Eye:**
+
+<img src="img/normal_eye.png" width="200px" height="200px"/> | <img src="img/normal_eye_funduscopy.png" width="200px" height="200px"/>
+[3][5]
+
+A healthy eye has a clear lens and an undamaged retina. This allows light to be focused correctly and ensures sharp vision. The normal function of the eye allows light to be directed through the lens onto the retina, where images are processed and sent to the brain via the optic nerve [4]. 
+
+**Cataract:**
+
+<img src="img/cataract.png" width="200px" height="200px"/> | <img src="img/cataract_funduscopy.png" width="200px" height="200px"/>
+[3][5]
+
+A cataract is a clouding of the lens that is often age-related, but can also occur with untreated diabetes mellitus and smoking. Symptoms include blurred vision (the eye loses the ability to focus), difficulty seeing at night and sensitivity to glare [4]. 
+
+**Glaucoma:**
+
+<img src="img/glaucoma.png" width="200px" height="200px"/>| <img src="img/glaucoma_funduscopy.png" width="200px" height="200px"/>
+[3][5]
+
+Glaucoma is an eye disease in which the optic nerve is damaged, which in the worst case can lead to blindness. Glaucoma typically causes no symptoms at first, which makes early diagnosis difficult. Over time, peripheral vision loss can occur, which often goes unnoticed until the damage is significant.  Risk factors include advanced age, a family history of glaucoma, elevated intraocular pressure [4].
+
+**Retinopathy:**
+
+<img src="img/retinopathy.png" width="200px" height="200px"/> | <img src="img/retinopathy_funduscopy.png" width="200px" height="200px"/>
+[3][5]
 
 
-* **Cataract:**
-A cataract is where the lens of the eye becomes opaque, clouding and losing the ability to focus. It is often associated with ageing and can also be caused by factors such as diabetes, smoking and prolonged exposure to sunlight.
 
-* **Glaucoma:**
-Glaucoma occurs when the fluid pressure inside the eye rises above normal levels. This increased pressure can damage the optic nerve, which is responsible for transmitting visual information from the eye to the brain. If left untreated, glaucoma can lead to loss of vision or even blindness.
-
-* **Retinopathy:**
-Retinopathy is a disease of the retina, the light-sensitive tissue at the back of the eye. It is often associated with diabetes and can damage the blood vessels in the retina, which can result in vision loss or even blindness if left untreated.
-
-
-
-
-
-
-These diseases can have serious effects on vision and early detection is crucial for effective treatment.
-
-
-| Normal Eye  | Cataract    | Retinopathy | Glaucoma    |
-|-------------|-------------|-------------|-------------|
-| ![Normal Eye](img/normal_eye.png) | ![Cataract](img/cataract.png) | ![Retinopathy](img/retinopathy.png) | ![Glaucoma](img/glaucoma.png) | 
-[2]
-
-
+Retinopathy is a disease of the retina, the light-sensitive tissue at the back of the eye. It is often associated with diabetes and can damage the blood vessels in the retina, which can result in vision loss or even blindness if left untreated [4].
 
 ## Install Guide
 TODO
@@ -41,13 +51,15 @@ TODO
 ## Data Description & Structure Analysis
 
 ### Content
-* Cataract 1038 Files​
+The images in the dataset, which we obtained from kaggle [6], are funduscopy images, which are divided into the following categories:
 
-* Diabetic Retinopathy 1098 Files​
+* *Cataract:* 1038 Files​
 
-* Glaukoma 1007 Files​
+* *Diabetic Retinopathy:* 1098 Files​
 
-* Normal 1074 Files
+* *Glaukoma:* 1007 Files​
+
+* *Normal:* 1074 Files
 
 ### Structure
 
@@ -95,5 +107,14 @@ TODO
 ## Sources
 [1] https://scitechdaily.com/unlocking-the-future-of-health-predicting-disease-with-retinal-imaging-and-genetics/
 
-[2] https://atlanticeyeinstitute.com/diabetic-eye-issues-5-ways-diabetes-impacts-vision/
+[2] World Health Organization (2021, February 26) Blindness and vision impairment. Retrieved June 10,
+2021, from https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment
+
+[3] Sanghavi, J., Kurhekar, M. Ocular disease detection systems based on fundus images: a survey. Multimed Tools Appl 83, 21471–21496 (2024). https://doi.org/10.1007/s11042-023-16366-x
+
+[4] https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases
+
+[5] https://atlanticeyeinstitute.com/diabetic-eye-issues-5-ways-diabetes-impacts-vision/
+
+[6] https://www.kaggle.com/datasets/arjunbasandrai/medical-scan-classification-dataset
 
