@@ -11,7 +11,6 @@ def train_epoch(
     data_loader: DataLoader,
     loss_function: CrossEntropyLoss,
     optimizer: Optimizer,
-    scheduler: LRScheduler,
     device: str,
     dev_mode=False,
 ):
@@ -50,8 +49,6 @@ def train_epoch(
         if dev_mode:
             print(f"Training Loss: {loss.item()}")
             break
-
-    scheduler.step()
 
     # Calculate running metrics
     epoch_loss = running_loss / count
