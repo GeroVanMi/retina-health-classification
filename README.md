@@ -25,28 +25,28 @@ In this project, the application of a Convolutional Neural Networks (CNNs) on fu
 
 **Normal Eye:**
 
-<img src="img/normal_eye.png" width="200px" height="200px"/>  <img src="data/Eyes/Normal/2493_left.jpg" width="200px" height="200px"/>
+<img src="img/normal_eye.png" width="200px" height="200px"/>  <img src="img/2493_left.jpg" width="200px" height="200px"/>
 [3][6]
 
 A healthy eye has a clear lens and an undamaged retina. This allows light to be focused correctly and ensures sharp vision. The normal function of the eye allows light to be directed through the lens onto the retina, where images are processed and sent to the brain via the optic nerve [4]. 
 
 **Cataract:**
 
-<img src="img/cataract.png" width="200px" height="200px"/> | <img src="data/Eyes/Cataract/_42_9949990.jpg" width="200px" height="200px"/>
+<img src="img/cataract.png" width="200px" height="200px"/> | <img src="img/_42_9949990.jpg" width="200px" height="200px"/>
 [3][6]
 
 A cataract is a clouding of the lens that is often age-related, but can also occur with untreated diabetes mellitus and smoking. Symptoms include blurred vision (the eye loses the ability to focus), difficulty seeing at night and sensitivity to glare [4]. 
 
 **Glaucoma:**
 
-<img src="img/glaucoma.png" width="200px" height="200px"/>| <img src="data/Eyes/Glaucoma/_74_2774709.jpg" width="200px" height="200px"/>
+<img src="img/glaucoma.png" width="200px" height="200px"/>| <img src="img/_74_2774709.jpg" width="200px" height="200px"/>
 [3][6]
 
 Glaucoma is an eye disease in which the optic nerve is damaged, which in the worst case can lead to blindness. Glaucoma typically causes no symptoms at first, which makes early diagnosis difficult. Over time, peripheral vision loss can occur, which often goes unnoticed until the damage is significant.  Risk factors include advanced age, a family history of glaucoma, elevated intraocular pressure [4].
 
 **Retinopathy:**
 
-<img src="img/retinopathy.png" width="200px" height="200px"/> | <img src="data/Eyes/Diabetic Retinopathy/10947_left.jpeg" width="200px" height="200px"/>
+<img src="img/retinopathy.png" width="200px" height="200px"/> | <img src="img/10947_left.jpeg" width="200px" height="200px"/>
 [3][5]
 
 
