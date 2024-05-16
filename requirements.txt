@@ -5,3 +5,6 @@ torchmetrics
 torch
 torchvision
 lightning
+scikit-learn
+alive-progress
+matplotlib
