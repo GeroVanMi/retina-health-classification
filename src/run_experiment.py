@@ -20,9 +20,10 @@ PROJECT_DIR = Path(__file__).parents[1]
 DATA_PATH = PROJECT_DIR.joinpath("data/Eyes/")
 
 NUMBER_OF_EPOCHS = 20
-BATCH_SIZE = 64
+BATCH_SIZE = 110
 MULTI_GPU_BATCH_SIZE = 512
 LEARNING_RATE = 1e-4
+LEARNING_RATE_GAMMA = 0.9
 
 EXPERIMENT_NAME = "LearningRateScheduler"
 PROJECT_NAME = "retina-health-classification"
@@ -34,7 +35,7 @@ MODEL_SAVE_PATH = PROJECT_DIR.joinpath(
     f"models/{ARCHITECTURE_NAME}_{int(time.time())}.pt"
 )
 # In dev mode we only train 3 images for 3 epochs
-DEV_MODE = True
+DEV_MODE = False
 
 if DEV_MODE:
     BATCH_SIZE = 3
@@ -97,6 +98,7 @@ def run_experiment():
         name=EXPERIMENT_NAME,
         config={
             "learning_rate": LEARNING_RATE,
+            "learning_rate_gamma": LEARNING_RATE_GAMMA,
             "architecture": ARCHITECTURE_NAME,
             "batch_size": batch_size,
             "dataset": DATASET_NAME,
@@ -113,7 +115,9 @@ def run_experiment():
 
     loss_function = CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
-    scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
+    scheduler = torch.optim.lr_scheduler.ExponentialLR(
+        optimizer, gamma=LEARNING_RATE_GAMMA
+    )
 
     # Training Loop
     for epoch in range(NUMBER_OF_EPOCHS):
