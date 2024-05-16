@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import torch
 from torch.nn import DataParallel
 
@@ -19,8 +21,8 @@ def initialize_model(ModelClass, device):
     return model
 
 
-def save_torch_model(model: torch.nn.Module, path: str, model_name: str):
+def save_torch_model(model: torch.nn.Module, path: Path, model_name: str):
     torch.save(model.state_dict(), path)
     artifact = wandb.Artifact(model_name, type="model")
-    artifact.add_file(path)
+    artifact.add_file(str(path))
     wandb.log_artifact(artifact)

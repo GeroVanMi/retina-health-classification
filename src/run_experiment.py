@@ -1,34 +1,40 @@
 import time
+from pathlib import Path
 
 import torch
 from torch.nn import CrossEntropyLoss, Module
 from torch.optim import Optimizer
+from torch.optim.lr_scheduler import LRScheduler
 from torch.utils.data import DataLoader
 
 import wandb
 from pipeline.evaluate import evaluate_epoch
 from pipeline.train import train_epoch
 from SimpleClassifier import SimpleClassifier
-from utils.data import create_train_validation_loaders
+from utils.data import create_train_validation_loaders, stop_if_data_is_missing
 from utils.model import initialize_model, save_torch_model
 from utils.quality_of_life import preflight_check
 
 # TODO: The GLOBAL variables here could be moved into a configuration class?
-DATA_PATH = "../data/Eyes/"
+PROJECT_DIR = Path(__file__).parents[1]
+DATA_PATH = PROJECT_DIR.joinpath("data/Eyes/")
 
 NUMBER_OF_EPOCHS = 20
 BATCH_SIZE = 64
-LEARNING_RATE = 1e-5
+MULTI_GPU_BATCH_SIZE = 512
+LEARNING_RATE = 1e-4
 
-EXPERIMENT_NAME = "Larger Images"
+EXPERIMENT_NAME = "LearningRateScheduler"
 PROJECT_NAME = "retina-health-classification"
 ENTITY_NAME = "gerovanmi"
 ARCHITECTURE_NAME = "U-NetEncoder"  # Must not contain special characters (except "-")
 DATASET_NAME = "Medical Scan Classification Dataset"
 
-MODEL_SAVE_PATH = f"../models/{ARCHITECTURE_NAME}_{int(time.time())}.pt"
+MODEL_SAVE_PATH = PROJECT_DIR.joinpath(
+    f"models/{ARCHITECTURE_NAME}_{int(time.time())}.pt"
+)
 # In dev mode we only train 3 images for 3 epochs
-DEV_MODE = False
+DEV_MODE = True
 
 if DEV_MODE:
     BATCH_SIZE = 3
@@ -42,10 +48,11 @@ def train_for_one_epoch(
     validation_loader: DataLoader,
     loss_function: CrossEntropyLoss,
     optimizer: Optimizer,
+    scheduler: LRScheduler,
     device: str,
 ):
     train_loss, train_accuracy, train_f1 = train_epoch(
-        model, train_loader, loss_function, optimizer, device, DEV_MODE
+        model, train_loader, loss_function, optimizer, scheduler, device, DEV_MODE
     )
     validation_loss, validation_accuracy, validation_f1 = evaluate_epoch(
         model, validation_loader, loss_function, device, DEV_MODE
@@ -64,6 +71,8 @@ def train_for_one_epoch(
 
 
 def run_experiment():
+    stop_if_data_is_missing(DATA_PATH)
+
     device = (
         "cuda"
         if torch.cuda.is_available()
@@ -73,7 +82,7 @@ def run_experiment():
     batch_size = BATCH_SIZE
     if number_of_gpus > 1:
         print("Using ", number_of_gpus, "GPUs.")
-        batch_size = 512
+        batch_size = MULTI_GPU_BATCH_SIZE
 
     # Give the user information about the run and
     # then ask for confirmation. This allows the user to
@@ -104,6 +113,7 @@ def run_experiment():
 
     loss_function = CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+    scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
 
     # Training Loop
     for epoch in range(NUMBER_OF_EPOCHS):
@@ -114,6 +124,7 @@ def run_experiment():
             validation_loader,
             loss_function,
             optimizer,
+            scheduler,
             device,
         )
 

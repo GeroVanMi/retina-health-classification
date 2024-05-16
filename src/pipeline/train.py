@@ -1,6 +1,7 @@
 import torch
 from torch.nn import CrossEntropyLoss
 from torch.optim import Optimizer
+from torch.optim.lr_scheduler import LRScheduler
 from torch.utils.data import DataLoader
 from torchmetrics.classification import Accuracy, F1Score
 
@@ -10,6 +11,7 @@ def train_epoch(
     data_loader: DataLoader,
     loss_function: CrossEntropyLoss,
     optimizer: Optimizer,
+    scheduler: LRScheduler,
     device: str,
     dev_mode=False,
 ):
@@ -49,6 +51,9 @@ def train_epoch(
             print(f"Training Loss: {loss.item()}")
             break
 
+    scheduler.step()
+
+    # Calculate running metrics
     epoch_loss = running_loss / count
     epoch_accuracy = running_accuracy / count
     epoch_f1 = running_f1 / count
