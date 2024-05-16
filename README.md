@@ -17,33 +17,38 @@ In this project, the application of a Convolutional Neural Networks (CNNs) on fu
 
 **Normal Eye:**
 
-<img src="img/normal_eye.png" width="200px" height="200px"/> | <img src="img/normal_eye_funduscopy.png" width="200px" height="200px"/>
-[3][5]
+<img src="img/normal_eye.png" width="200px" height="200px"/>  <img src="data/Eyes/Normal/2493_left.jpg" width="200px" height="200px"/>
+[3][6]
 
 A healthy eye has a clear lens and an undamaged retina. This allows light to be focused correctly and ensures sharp vision. The normal function of the eye allows light to be directed through the lens onto the retina, where images are processed and sent to the brain via the optic nerve [4]. 
 
 **Cataract:**
 
-<img src="img/cataract.png" width="200px" height="200px"/> | <img src="img/cataract_funduscopy.png" width="200px" height="200px"/>
-[3][5]
+<img src="img/cataract.png" width="200px" height="200px"/> | <img src="data/Eyes/Cataract/_42_9949990.jpg" width="200px" height="200px"/>
+[3][6]
 
 A cataract is a clouding of the lens that is often age-related, but can also occur with untreated diabetes mellitus and smoking. Symptoms include blurred vision (the eye loses the ability to focus), difficulty seeing at night and sensitivity to glare [4]. 
 
 **Glaucoma:**
 
-<img src="img/glaucoma.png" width="200px" height="200px"/>| <img src="img/glaucoma_funduscopy.png" width="200px" height="200px"/>
-[3][5]
+<img src="img/glaucoma.png" width="200px" height="200px"/>| <img src="data/Eyes/Glaucoma/_74_2774709.jpg" width="200px" height="200px"/>
+[3][6]
 
 Glaucoma is an eye disease in which the optic nerve is damaged, which in the worst case can lead to blindness. Glaucoma typically causes no symptoms at first, which makes early diagnosis difficult. Over time, peripheral vision loss can occur, which often goes unnoticed until the damage is significant.  Risk factors include advanced age, a family history of glaucoma, elevated intraocular pressure [4].
 
 **Retinopathy:**
 
-<img src="img/retinopathy.png" width="200px" height="200px"/> | <img src="img/retinopathy_funduscopy.png" width="200px" height="200px"/>
+<img src="img/retinopathy.png" width="200px" height="200px"/> | <img src="data/Eyes/Diabetic Retinopathy/10947_left.jpeg" width="200px" height="200px"/>
 [3][5]
 
 
-
 Retinopathy is a disease of the retina, the light-sensitive tissue at the back of the eye. It is often associated with diabetes and can damage the blood vessels in the retina, which can result in vision loss or even blindness if left untreated [4].
+
+## Related Work
+To address the global prevalence of eye diseases, numerous studies have investigated the classification of different eye diseases. In order to make our developed best CNN comparable with existing studies, we used studies that perform multiclassification predictions as well as those that focus specifically on individual eye diseases. In addition, we also included approaches that are not based on CNNs.
+
+The results of these analyses and the comparison of our best model are shown in the table below:
+
 
 ## Install Guide
 TODO
@@ -105,16 +110,49 @@ TODO
 
 
 ## Sources
-[1] https://scitechdaily.com/unlocking-the-future-of-health-predicting-disease-with-retinal-imaging-and-genetics/
+[1] Massachusetts Eye and Ear Infirmary, 'Unlocking the Future of Health: Predicting Disease With Retinal Imaging and Genetics,' SciTechDaily, 07-Feb-2024. [Online]. Available: https://scitechdaily.com/unlocking-the-future-of-health-predicting-disease-with-retinal-imaging-and-genetics/. [Accessed: 16-May-2024].
 
-[2] World Health Organization (2021, February 26) Blindness and vision impairment. Retrieved June 10,
-2021, from https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment
+[2] World Health Organization, 'Blindness and vision impairment,' WHO, [Online]. Available: https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment. [Accessed: 16-May-2024].
 
-[3] Sanghavi, J., Kurhekar, M. Ocular disease detection systems based on fundus images: a survey. Multimed Tools Appl 83, 21471–21496 (2024). https://doi.org/10.1007/s11042-023-16366-x
+[3] J. Sanghavi and M. Kurhekar, "Ocular disease detection systems based on fundus images: A survey," Multimedia Tools and Applications, vol. 83, pp. 21471-21496, 2024. [Online]. Available: https://doi.org/10.1007/s11042-023-16366-x. [Accessed: 16-May-2024].
 
-[4] https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases
+[4] National Eye Institute, 'Eye Conditions and Diseases,' National Eye Institute, [Online]. Available: https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases. [Accessed: 16-May-2024].
 
-[5] https://atlanticeyeinstitute.com/diabetic-eye-issues-5-ways-diabetes-impacts-vision/
+[5] Atlantic Eye Institute, 'Diabetic Eye Issues: 5 Ways Diabetes Impacts Vision,' Atlantic Eye Institute, 18-Oct-2021. [Online]. Available: https://atlanticeyeinstitute.com/diabetic-eye-issues-5-ways-diabetes-impacts-vision/. [Accessed: 16-May-2024].
 
-[6] https://www.kaggle.com/datasets/arjunbasandrai/medical-scan-classification-dataset
+[6] A. Basandrai, "Medical Scan Classification Dataset," Kaggle, 2023. [Online]. Available: https://www.kaggle.com/datasets/arjunbasandrai/medical-scan-classification-dataset. [Accessed: 16-May-2024].
+
+[7] S. Kim, J. Lee, and H. Choi, "Advanced retinal imaging technology using deep learning," in Proc. IEEE International Conference on Biomedical Engineering and Sciences, 2021, pp. 256-260. [Online]. Available: https://ieeexplore.ieee.org/abstract/document/9393050. [Accessed: 16-May-2024]
+
+[8] P. Glaret subin and P. Muthukannan, "Optimized convolution neural network based multiple eye disease detection," Computers in Biology and Medicine, vol. 146, 2022. [Online]. Available: https://doi.org/10.1016/j.compbiomed.2022.105648. [Accessed: 16-May-2024].
+
+[9] N. Gour and P. Khanna, "Multi-class multi-label ophthalmological disease detection using transfer learning based convolutional neural network," Biomedical Signal Processing and Control, vol. 66, 2021. [Online]. Available: https://doi.org/10.1016/j.bspc.2020.102329. [Accessed: 16-May-2024].
+
+[10] U. Raghavendra, H. Fujita b, S. V Bhandary, A. Gudigar, T. Jen Hong, U. Rajendra Acharya, "Deep convolution neural network for accurate diagnosis of glaucoma using digital fundus images," Information Sciences, vol. 441, pp. 41-49, 2018. [Online]. Available: https://doi.org/10.1016/j.ins.2018.01.051. [Accessed: 16-May-2024].
+
+[11] A. Diaz-Pinto, S. Morales, V. Naranjo, T. Köhler, J. M. Mossi, and A. Navea, "CNNs for automatic glaucoma assessment using fundus images: An extensive validation," BioMedical Engineering OnLine, vol. 18, no. 29, Mar. 2019. [Online]. Available: https://biomedical-engineering-online.biomedcentral.com/articles/10.1186/s12938-019-0649-y. [Accessed: 16-May-2024].
+
+[12] S.J. Grace Shoba, A. Brintha Therese, "Detection of glaucoma disease in fundus images based on morphological operation and finite element method," Biomedical Signal Processing and Control, vol. 62, 2020. [Online]. Available: https://doi.org/10.1016/j.bspc.2020.101986. [Accessed: 16-May-2024].
+
+[12] A. Septiarini, D. M. Khairina, A. H. Kridalaksana, and H. Hamdani, "Automatic Glaucoma Detection Method Applying a Statistical Approach to Fundus Images," Healthcare Informatics Research, vol. 24, no. 1, pp. 53-60, Jan. 2018. [Online]. Available: https://e-hir.org/journal/view.php?id=10.4258/hir.2018.24.1.53. [Accessed: 16-May-2024].
+
+[13] Linglin Zhang et al., "Automatic cataract detection and grading using Deep Convolutional Neural Network," 2017 IEEE 14th International Conference on Networking, Sensing and Control (ICNSC), Calabria, pp. 60-65, 2017. [Online]. Available: https://doi.org/10.1109/ICNSC.2017.8000068. [Accessed: 16-May-2024].
+
+[14] J. Ran, K. Niu, Z. He, H. Zhang and H. Song, "Cataract Detection and Grading Based on Combination of Deep Convolutional Neural Network and Random Forests," 2018 International Conference on Network Infrastructure and Digital Content (IC-NIDC), Guiyang, China, pp. 155-159, 2018. [Online]. Available: https://doi.org/10.1109/ICNIDC.2018.8525852 [Accessed: 16-May-2024].
+
+[15] Y. Zhou, G. Li and H. Li, "Automatic Cataract Classification Using Deep Neural Network With Discrete State Transition," in IEEE Transactions on Medical Imaging, vol. 39, no. 2, pp. 436-446, Feb. 2020. [Online]. Available: https://doi.org/10.1109/TMI.2019.2928229. [Accessed: 16-May-2024].
+
+
+[16] M. Mohsin Butt, G. Latif, D.N.F. Awang Iskandar, J. Alghazo, A. H. Khan, "Multi-channel Convolutions Neural Network Based Diabetic Retinopathy Detection from Fundus Images," Procedia Computer Science, vol. 163, pp. 283-291, 2019. [Online]. Available: https://doi.org/10.1016/j.procs.2019.12.110. [Accessed: 16-May-2024].
+
+[17] Y.-H. Li, N.-N. Yeh, S.-J. Chen, and Y.-C. Chung, "Computer-Assisted Diagnosis for Diabetic Retinopathy Based on Fundus Images Using Deep Convolutional Neural Network," Mobile Information Systems, vol. 2019, Jan. 2019. [Online]. Available: https://www.hindawi.com/journals/misy/2019/6142839/. [Accessed: 16-May-2024].
+
+[18] E. Saleh, J. Błaszczyński, A. Moreno, A. Valls, P. Romero-Aroca, S. de la Riva-Fernández, R. Słowiński, "Learning ensemble classifiers for diabetic retinopathy assessment," Artificial Intelligence in Medicine, vol. 85, 2018. [Online]. Available: https://doi.org/10.1016/j.artmed.2017.09.006. [Accessed: 16-May-2024].
+
+
+
+
+
+
+
 
