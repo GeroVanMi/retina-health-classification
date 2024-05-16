@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "retinal-health-classification"
+version = "0.0.1"
+dependencies = [
+  "wandb",
+  "pandas",
+  "datasets",
+  "torchmetrics",
+  "torch",
+  "torchvision",
+  "lightning",
+  "scikit-learn",
+  "alive-progress",
+  "matplotlib",
+]
+
+[tool.setuptools.packages.find]
+# All the following settings are optional:
+where = ["src"]

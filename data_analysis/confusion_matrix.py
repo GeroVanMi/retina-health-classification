@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import numpy as np
-import pandas as pd
 import torch
 from alive_progress import alive_bar
 from matplotlib import pyplot as plt

@@ -22,7 +22,8 @@ def create_train_validation_loaders(
 ) -> tuple[DataLoader, DataLoader]:
     image_transform = torchvision.transforms.Compose(
         [
-            torchvision.transforms.Resize((512, 512)),
+            torchvision.transforms.Resize((600, 600)),
+            torchvision.transforms.CenterCrop(512),
             torchvision.transforms.ToTensor(),  # Convert the image to a pytorch tensor
         ]
     )

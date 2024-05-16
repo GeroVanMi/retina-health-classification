@@ -7,6 +7,14 @@
 
 ---
 
+## Installation
+In order to run the code in this project create a virtual environment and install the package:
+```shell
+python3 -m venv venv
+source venv/bin/activate
+pip install -e .
+```
+
 ## Introduction
 Over two billion people worldwide suffer from vision loss due to an eye disease [2]. Some of these losses can be irreversible. Timely intervention or early detection can slow down the damage process, preserve vision and generally improve the quality of life of those affected.
 However, early detection of eye diseases is difficult, as they are often asymptomatic in the early stages. Ophthalmologists, specialists in the detection of eye diseases, use various diagnostic instruments to examine eye diseases, such as slit lamps, tonometry, perimetry, gonioscopy, pachymetry and fundoscopy.
