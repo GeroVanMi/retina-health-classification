@@ -46,7 +46,7 @@ def run_experiment():
             "architecture": config.ARCHITECTURE_NAME,
             "batch_size": config.BATCH_SIZE,
             "dataset": config.DATASET_NAME,
-            "epochs": config.NUMBER_OF_EPOCHS_TRAINING,
+            "epochs": config.NUMBER_OF_EPOCHS,
             "dev_mode": config.DEV_MODE,
         },
     )
@@ -67,7 +67,7 @@ def run_experiment():
     )
 
     # Training Loop
-    for epoch in range(config.NUMBER_OF_EPOCHS_TRAINING):
+    for epoch in range(config.NUMBER_OF_EPOCHS):
         print(f"Started training Epoch {epoch}")
         train_for_one_epoch(
             model,
