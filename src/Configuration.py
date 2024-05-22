@@ -37,6 +37,13 @@ class Configuration:
         f"models/{ARCHITECTURE_NAME}_{int(time.time())}.pt"
     )
 
+    CLASS_INDICES = {
+        "Cataract": 0,
+        "Diabetic Retinopathy": 1,
+        "Glaucoma": 2,
+        "Normal": 3,
+    }
+
     @property
     def RUN_NAME(self):
         if self.DEV_MODE:

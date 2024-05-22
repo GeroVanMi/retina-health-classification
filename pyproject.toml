@@ -16,6 +16,7 @@ dependencies = [
   "scikit-learn",
   "alive-progress",
   "matplotlib",
+  "jupyterlab",
 ]
 
 [tool.setuptools.packages.find]
