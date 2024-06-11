@@ -11,3 +11,6 @@ models/
 wandb/
 artifacts/
 
+# Terraform
+terraform*
+.terraform*

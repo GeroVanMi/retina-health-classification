@@ -5,6 +5,8 @@ import torchvision
 from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
                               random_split)
 
+from utils.EyesDataset import EyesDataset
+
 
 def stop_if_data_is_missing(data_path: Path):
     if not data_path.exists():
@@ -20,14 +22,8 @@ def stop_if_data_is_missing(data_path: Path):
 def create_train_validation_loaders(
     folder_path: Path, batch_size=32, random_seed=0
 ) -> tuple[DataLoader, DataLoader]:
-    image_transform = torchvision.transforms.Compose(
-        [
-            torchvision.transforms.Resize((600, 600)),
-            torchvision.transforms.CenterCrop(512),
-            torchvision.transforms.ToTensor(),  # Convert the image to a pytorch tensor
-        ]
-    )
-    data = torchvision.datasets.ImageFolder(str(folder_path), transform=image_transform)
+
+    data = EyesDataset(folder_path)
 
     torch.manual_seed(random_seed)
     train_data, validation_data = random_split(data, (0.8, 0.2))
