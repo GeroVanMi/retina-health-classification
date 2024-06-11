@@ -21,20 +21,23 @@ def train_epoch(
     running_f1 = 0
     count = 0
 
-    for images, labels in data_loader:
+    for images1, images2, labels1, labels2 in data_loader:
         count += 1
 
-        images = images.to(device)
-        predictions = model(images)
+        images1 = images1.to(device)
+        images2 = images2.to(device)
+        predictions = model(images1, images2)
 
-        labels = labels.to(device)
+        labels1 = labels1.to(device)
+        labels2 = labels2.to(device)
 
-        loss = loss_function(predictions, labels)
+        # TODO: Incorporate the second label into the loss?
+        loss = loss_function(predictions, labels1)
 
         compute_accuracy = Accuracy(task="multiclass", num_classes=4).to(device)
         compute_f1 = F1Score(task="multiclass", num_classes=4).to(device)
-        accuracies = compute_accuracy(predictions, labels)
-        f1_scores = compute_f1(predictions, labels)
+        accuracies = compute_accuracy(predictions, labels1)
+        f1_scores = compute_f1(predictions, labels1)
 
         running_loss += loss.item()
         running_accuracy += accuracies

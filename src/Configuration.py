@@ -8,7 +8,7 @@ import torch
 @dataclass
 class Configuration:
     # In dev mode we only train 3 images for 3 epochs
-    DEV_MODE = False
+    DEV_MODE = True
 
     # Training hyper-parameters
     NUMBER_OF_EPOCHS_TRAINING = 20
@@ -22,7 +22,7 @@ class Configuration:
     LEARNING_RATE_EPOCH_PATIENCE = 2
 
     # Names / Tags
-    EXPERIMENT_NAME = "ResizeThenCrop"
+    EXPERIMENT_NAME = "SeparateByPatients"
     PROJECT_NAME = "retina-health-classification"
     ENTITY_NAME = "gerovanmi"
     ARCHITECTURE_NAME = (
@@ -42,6 +42,7 @@ class Configuration:
         "Diabetic Retinopathy": 1,
         "Glaucoma": 2,
         "Normal": 3,
+        "Empty": -1,
     }
 
     @property

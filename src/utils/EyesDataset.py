@@ -1,7 +1,6 @@
 import re
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 import torch
 import torchvision
@@ -9,6 +8,8 @@ from PIL import Image
 from torch.utils.data import DataLoader, Dataset
 
 from Configuration import Configuration
+
+config = Configuration()
 
 
 def extract_patients_from_path(path: Path):
@@ -35,6 +36,7 @@ def extract_patients_from_path(path: Path):
                     "file1": file,
                     "file2": None,
                     "disease_name": disease_name,
+                    "class_index": config.CLASS_INDICES[disease_name],
                     "id": patient_id,
                 }
             else:
@@ -66,21 +68,20 @@ class EyesDataset(Dataset):
         image1 = self.image_transforms(Image.open(patient.file1))
         if patient.file2:
             image2 = self.image_transforms(Image.open(patient.file2))
-            class2 = patient.disease_name
+            class2 = patient.class_index
         else:
-            image2 = torch.zeros((256, 256))
-            class2 = "Empty"
+            image2 = torch.zeros((3, 256, 256))
+            class2 = config.CLASS_INDICES["Empty"]
 
         return (
             image1,
             image2,
-            patient.disease_name,
+            patient.class_index,
             class2,
         )
 
 
 if __name__ == "__main__":
-    config = Configuration()
     dataset = EyesDataset(config.DATA_PATH, None)
     data_loader = DataLoader(dataset, batch_size=1)
 

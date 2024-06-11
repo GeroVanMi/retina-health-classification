@@ -2,8 +2,7 @@ from pathlib import Path
 
 import torch
 import torchvision
-from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
-                              random_split)
+from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, random_split
 
 from utils.EyesDataset import EyesDataset
 
@@ -22,7 +21,6 @@ def stop_if_data_is_missing(data_path: Path):
 def create_train_validation_loaders(
     folder_path: Path, batch_size=32, random_seed=0
 ) -> tuple[DataLoader, DataLoader]:
-
     data = EyesDataset(folder_path)
 
     torch.manual_seed(random_seed)

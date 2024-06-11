@@ -6,9 +6,9 @@ from torch.utils.data import DataLoader
 
 import wandb
 from Configuration import Configuration
+from DoubleClassifier import DoubleClassifier
 from pipeline.evaluate import evaluate_epoch
 from pipeline.train import train_epoch
-from SimpleClassifier import SimpleClassifier
 from utils.data import create_train_validation_loaders, stop_if_data_is_missing
 from utils.model import initialize_model, save_torch_model
 from utils.quality_of_life import preflight_check
@@ -55,7 +55,7 @@ def run_experiment():
     train_loader, validation_loader = create_train_validation_loaders(
         config.DATA_PATH, config.BATCH_SIZE
     )
-    model = initialize_model(SimpleClassifier, device)
+    model = initialize_model(DoubleClassifier, device)
 
     loss_function = CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=config.LEARNING_RATE)
