@@ -55,7 +55,85 @@ Retinopathy is a disease of the retina, the light-sensitive tissue at the back o
 ## Related Work
 To address the global prevalence of eye diseases, numerous studies have investigated the classification of different eye diseases. In order to make our developed best CNN comparable with existing studies, we used studies that perform multiclassification predictions as well as those that focus specifically on individual eye diseases. In addition, we also included approaches that are not based on CNNs.
 
-The results of these analyses and the comparison of our best model are shown in the table below:
+The results of these analyses are shown in the table below:
+
+<table border="1">
+  <tr>
+    <th>Disease</th>
+    <th>Study</th>
+    <th>Approach</th>
+    <th>Accuracy</th>
+  </tr>
+  <tr>
+    <td rowspan="3"><strong>Multiclass</strong></td>
+    <td><em>Khan et al. (2019)</em>​ <br> An Automatic Ocular Disease Detection Scheme from Enhanced Fundus Images Based on Ensembling Deep CNN Networks <a href="https://ieeexplore.ieee.org/abstract/document/9393050">Link</a></td>
+    <td>CNN</td>
+    <td>86.00%%</td>
+  </tr>
+  <tr>
+    <td><em>Glaret et al. (2022)</em>​ <br>Optimized convolution neural network based multiple eye disease detection <a href="https://doi.org/10.1016/j.compbiomed.2022.105648">Link</a></td>
+    <td>CNN</td>
+    <td>98.3%</td>
+  </tr>
+  <tr>
+    <td><em>Gour et al. (2021)</em>​ <br> Multi-class multi-label ophthalmological disease detection using transfer  learning based convolutional neural network <a href="https://doi.org/10.1016/j.bspc.2020.102329">Link</a></td>
+    <td>CNN</td>
+    <td>89.06%</td>
+  </tr>
+  <tr>
+    <td rowspan="4"><strong>Claucoma</strong></td>
+    <td><em>Raghavendra et al. (2018)</em> [10] <br>​ Deep convolution neural network for accurate diagnosis of glaucoma using digital fundus images <a href="https://doi.org/10.1016/j.ins.2018.01.051">Link</a></td>
+    <td>CNN</td>
+    <td>98.13%</td>
+  </tr>
+  <tr>
+    <td><em>Dias-Pinto et al. (2019)</em> [11] <br>​ CNNs for automatic glaucoma assessment using fundus images: an extensive validation <a href="https://biomedical-engineering-online.biomedcentral.com/articles/10.1186/s12938-019-0649-y">Link</a></td>
+    <td>CNN (with different ImageNet trained models)</td>
+    <td>96.05%</td>
+  </tr>
+  <tr>
+    <td><em>Shoba et al. (2020) [12]</em>​ <br>Detection of glaucoma disease in fundus images based on morphological operation and finite element method <a href="https://doi.org/10.1016/j.bspc.2020.101986">Link</a></td>
+    <td>SVM</td>
+    <td>94.86%</td>
+  </tr>
+  <tr>
+    <td><em>Septiarini et al. (2018) [12]</em><br>​ Automatic Glaucoma Detection Method Applying a Statistical Approach to Fundus Images <a href="https://e-hir.org/journal/view.php?id=10.4258/hir.2018.24.1.53">Link</a></td>
+    <td>KNN</td>
+    <td>95.24%</td>
+ </tr>
+  <tr>
+    <td rowspan="3"><strong>Cataract</strong></td>
+    <td><em>Zhang et al. (2017)[13]</em> <br>​ Automatic cataract detection and grading using Deep Convolutional Neural Network <a href="https://doi.org/10.1109/ICNSC.2017.8000068">Link</a></td>
+    <td>CNN</td>
+    <td>93.52%</td>
+  </tr>
+  <tr>
+    <td><em>Ran et al. (2018) [14]</em> <br>​ Cataract Detection and Grading Based on Combination of Deep Convolutional Neural Network and Random Forests <a href="https://doi.org/10.1109/ICNIDC.2018.8525852">Link</a></td>
+    <td>CNN with Random Forest</td>
+    <td>90.69%</td>
+  </tr>
+  <tr>
+    <td><em>Zhou et al. (2020)​ [15]</em> <br> Automatic Cataract Classification Using Deep Neural Network With Discrete State Transition <a href="https://doi.org/10.1109/TMI.2019.2928229">Link</a></td>
+    <td>Deep NN</td>
+    <td>94.00%</td>
+  </tr>
+  <tr>
+    <td rowspan="3"><strong>Diabetic Retinopathy</strong></td>
+    <td><em>Mohsin Butt et al. (2019) [16]</em><br> Multi-channel Convolutions Neural Network Based Diabetic Retinopathy Detection from Fundus Images <a href="https://doi.org/10.1016/j.procs.2019.12.110">Link</a></td>
+    <td>CNN</td>
+    <td>97.08%</td>
+  </tr>
+  <tr>
+    <td><em>Li et al. (2019) [17]</em>​ <br> Computer-Assisted Diagnosis for Diabetic Retinopathy Based on Fundus Images Using Deep Convolutional Neural Network <a href="https://www.hindawi.com/journals/misy/2019/6142839/">Link</a></td>
+    <td>CNN</td>
+    <td>91.05%</td>
+  </tr>
+  <tr>
+    <td><em>Saleh et al. (2018)​ [18] </em> <br> Learning ensemble classifiers for diabetic retinopathy assessment <a href="https://doi.org/10.1016/j.artmed.2017.09.006">Link</a></td>
+    <td>Ensemble Classifier</td>
+    <td>72.84%</td>
+  </tr>
+</table>
 
 
 ## Install Guide
