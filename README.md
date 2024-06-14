@@ -143,14 +143,14 @@ The results of these analyses are shown in the table below:
 ## Data Description & Structure Analysis
 
 ### Content
-The images in the dataset, which we obtained from kaggle [6], are funduscopy images, which are divided into the categories Normal, Glaucoma, Cataract and Diabetic Retinopathy. Each of these categories contains up to two images per patient (left and right eye). The following table shows the distribution of the data in the individual categories as well as the distribution of images of the left and right eye within these categories.
+The images in the dataset, which we obtained from kaggle [6], are funduscopy images, which are divided into the categories **Normal**, **Glaucoma**, **Cataract** and **Diabetic Retinopathy**. Each of these categories contains up to two images per patient (left and right eye). The following table shows the distribution of the data in the individual categories as well as the distribution of images of the left and right eye within these categories.
 
 | Condition            | Files       | Patient IDs | Left   | Right  |
 |----------------------|-------------|-------------|--------|--------|
-| Normal               | 1074 Files  | xy PatIDs   | xy left| xy right|
-| Glaukoma             | 1007 Files  | xy PatIDs   | xy left| xy right|
-| Cataract             | 1038 Files  | xy PatIDs   | xy left| xy right|
-| Diabetic Retinopathy | 1098 Files  | xy PatIDs   | xy left| xy right|
+| Normal               | 1074 Files  | xy  | xy | xy |
+| Glaukoma             | 1007 Files  | xy  | xy | xy |
+| Cataract             | 1038 Files  | xy  | xy | xy |
+| Diabetic Retinopathy | 1098 Files  | xy  | xy | xy |
 
 
 ### Structure
