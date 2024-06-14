@@ -13,6 +13,9 @@ from utils.data import create_train_validation_loaders
 
 
 def compute_confusion_matrix():
+    """
+    Compute the confusion matrix for the trained model.
+    """
     config = Configuration()
     y_true = []
     y_pred = []

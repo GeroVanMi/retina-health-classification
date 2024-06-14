@@ -7,6 +7,9 @@ import torch
 
 @dataclass
 class Configuration:
+    """
+    The configuration for training the model and experiment.
+    """
     # In dev mode we only train 3 images for 3 epochs
     DEV_MODE = True
 

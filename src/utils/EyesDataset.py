@@ -22,6 +22,8 @@ def extract_patients_from_path(path: Path):
         class: string
         id:    number
     }
+    :param path: The path to the images.
+    :return: The patients as a dictionary.
     """
     patients = {}
     disease_name = path.name
@@ -46,7 +48,14 @@ def extract_patients_from_path(path: Path):
 
 
 class EyesDataset(Dataset):
+    """
+    The dataset for the eyes.
+    """
     def __init__(self, image_directory: Path):
+        """
+        Initialize the dataset.
+        :param image_directory: The directory containing the images.
+        """
         classes = image_directory.glob("*")
 
         patients_per_class = [extract_patients_from_path(path) for path in classes]
@@ -60,9 +69,18 @@ class EyesDataset(Dataset):
         )
 
     def __len__(self):
+        """
+        Get the length of the dataset.
+        :return: The length of the dataset.
+        """
         return len(self.patients)
 
     def __getitem__(self, index):
+        """
+        Get an item from the dataset.
+        :param index: The index of the item to get.
+        :return: The item at the given index.
+        """
         patient = self.patients.iloc[index]
 
         image1 = self.image_transforms(Image.open(patient.file1))

@@ -11,6 +11,15 @@ def evaluate_epoch(
     device: str,
     dev_mode=False,
 ):
+    """
+    Evaluate the model on the given data loader.
+    :param model: The model to evaluate.
+    :param data_loader: The data loader to evaluate the model on.
+    :param loss_function: The loss function to use.
+    :param device: The device to use.
+    :param dev_mode: Whether to run in development mode.
+    :return: The loss, accuracy, and F1 score for the model.
+    """
     model.eval()
 
     running_loss = 0

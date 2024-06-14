@@ -22,6 +22,9 @@ def initialize_model(ModelClass, device):
 
 
 def save_torch_model(model: torch.nn.Module, path: Path, model_name: str):
+    """
+    Save the model to the given path and log it as an artifact on wandb.
+    """
     torch.save(model.state_dict(), path)
     artifact = wandb.Artifact(model_name, type="model")
     artifact.add_file(str(path))

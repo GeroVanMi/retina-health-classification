@@ -14,6 +14,16 @@ def train_epoch(
     device: str,
     dev_mode=False,
 ):
+    """
+    Train the model on the given data loader.
+    :param model: The model to train.
+    :param data_loader: The data loader to train the model on.
+    :param loss_function: The loss function to use.
+    :param optimizer: The optimizer to use.
+    :param device: The device to use.
+    :param dev_mode: Whether to run in development mode.
+    :return: The loss, accuracy, and F1 score for the model.
+    """
     model.train()
 
     running_loss = 0

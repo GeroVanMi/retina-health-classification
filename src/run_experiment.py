@@ -17,6 +17,18 @@ config = Configuration()
 
 
 def run_experiment():
+    """
+    Run the experiment as configured in the Configuration class.
+    
+    This function is the main entry point for the training pipeline.
+    
+    It will:
+    - Load the data
+    - Initialize the model, loss function and optimizer
+    - Run the training loop
+    - Log the results on wandb
+    - Save the model on wandb as artifact registry
+    """
     stop_if_data_is_missing(config.DATA_PATH)
 
     device = (
@@ -95,6 +107,23 @@ def train_for_one_epoch(
     scheduler: ReduceLROnPlateau,
     device: str,
 ):
+    """
+    Train the model for one epoch.
+    :param model: The model to train.
+    :param train_loader: The data loader for training.
+    :param validation_loader: The data loader for validation.
+    :param loss_function: The loss function to use.
+    :param optimizer: The optimizer to use.
+    :param scheduler: The learning rate scheduler to use.
+    :param device: The device to use.
+    
+    This function is responsible for training the model for one epoch.
+    It will:
+    - Run the training loop
+    - Evaluate the model on the validation set
+    - Log the results on wandb
+    - Update the learning rate scheduler
+    """
     train_loss, train_accuracy, train_f1 = train_epoch(
         model, train_loader, loss_function, optimizer, device, config.DEV_MODE
     )
