@@ -152,20 +152,29 @@ The images in the dataset, which we obtained from kaggle [6], are funduscopy ima
 | Cataract             | 1038 Files  | xy  | xy | xy |
 | Diabetic Retinopathy | 1098 Files  | xy  | xy | xy |
 
+TODO: visualization?
 
 ### Structure
 
 ## Data Preprocessing
-Um die Bilder für das Training des CNN vorzubereiten, werden verschiedene Preprocessing-Schritte durchgeführt:
-1. **Resizing the images to uniform dimensions:**
+In order to prepare the images for CNN training, several preprocessing steps are performed:
+1. **Resizing:**
+*  The images are loaded first. Most of them are available with a resolution of 600 x 600 pixels. Those that are larger will be resized to 600 x 600. This ensures that no important information is lost and that the images are not distorted despite the reduction in resolution.
 
-*  The images are loaded first. Most of them are available with a resolution of 512 x 512 pixels. Those that are larger will be resized to 512 x 512. This ensures that no important information is lost and that the images are not distorted despite the reduction in resolution.
+2. **Center Crop:**
+* Since there are different formats in the images and they are spread over all four categories, all images will be cropped to 512 x 512 pixels after resizing.
 
-1. **Splitting data:**
+3. **Splitting data:**
 * The data is split into training and validation data with a split of 80% training data (3374 images) and 20% validation data (843 images).
 
 ## Model Architecture
-Das CNN-Modell besteht aus mehreren Schichten:
+We used two different approaches when designing our model. For the **SimpleClassifier**, we applied all the data in the dataset without considering the laterality of the image. 
+
+For the **DoubleClassifier**, we also used all available data, but taking the laterality into account. The classifier was no longer provided with the individual images, but with a patient ID to which 1 - maximum 2 images are assigned.
+
+The architecture modules are explained in detail below:
+### SimpleClassifier
+
 1. **Convolutional Layer:** 
 * 6 layers with 2 convolutions, resulting in a total of 12 convolutions
 * This increases the number of channels after each convolution layer.
@@ -179,10 +188,26 @@ Das CNN-Modell besteht aus mehreren Schichten:
 3. **Fully Connected Layer:**
 * Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
 
+### DoubleClassifier
+1. **Convolutional Layer:** 
+* TODO
+
+2. **Pooling Layer:**
+* TODO
+
+3. **Fully Connected Layer:**
+* Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
+
 ## Model Training
-* NUMBER_OF_EPOCHS = 20
-* BATCH_SIZE = 64
-* LEARNING_RATE = 1e-5
+The configurations that we need for our model are defined in `Configuration.py`. In development mode `(DEV_MODE)` 3 epochs are trained, while in effective training 20 epochs are performed.
+
+The training hyperparameters include 20 epochs for training ` (NUMBER_OF_EPOCHS_TRAINING)` and 3 epochs for testing `(DEV_MODE)``(NUMBER_OF_EPOCHS_TESTING)`, as well as batch sizes of 110 for training `(BATCH_SIZE_TRAINING)` and 3 for testing `(BATCH_SIZE_TESTING)`. When using multiple GPUs, a batch size of 512 `(MULTI_GPU_BATCH_SIZE)` is used. The learning rate `(LEARNING_RATE)` is 1e-4 and is reduced by a factor of 0.1 `(LEARNING_RATE_FACTOR)` after 2 epochs without optimization `(LEARNING_RATE_EPOCH_PATIENCE)`.
+
+Names and tags are defined for the experiment, the project, the entity, the architecture and the data set. These help to manage the experiments. Data and models are stored in the specified directories `(DATA_PATH, MODEL_SAVE_PATH)`.
+
+The classification indices `(CLASS_INDICES)` for different categories of our dataset are also defined
+
+Additional dynamic properties such as `RUN_NAME`, `NUMBER_OF_EPOCH` and `BATCH_SIZE` adapt depending on the mode `(DEV_MODE)` and the number of GPUs used `(NUMBER_OF_GPUS)`
 
 ## Model Evaluation Metric
 * The performance of the model is evaluated with Multiclass Accuracy (from Torchmetrics), as the four classes are sufficiently balanced.
