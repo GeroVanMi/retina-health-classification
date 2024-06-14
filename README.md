@@ -62,12 +62,14 @@ The results of these analyses are shown in the table below:
     <th>Study</th>
     <th>Approach</th>
     <th>Accuracy</th>
+    <th>Ours</th>
   </tr>
   <tr>
     <td rowspan="3"><strong>Multiclass</strong></td>
     <td><em>Khan et al. (2019)</em> [7]​ <br> An Automatic Ocular Disease Detection Scheme from Enhanced Fundus Images Based on Ensembling Deep CNN Networks <a href="https://ieeexplore.ieee.org/abstract/document/9393050">Link</a></td>
     <td>CNN</td>
     <td>86.00%</td>
+    <td rowspan="3" style="color: red"><strong>86.9%</strong></td>
   </tr>
   <tr>
     <td><em>Glaret et al. (2022)</em> [8]​ <br>Optimized convolution neural network based multiple eye disease detection <a href="https://doi.org/10.1016/j.compbiomed.2022.105648">Link</a></td>
@@ -84,6 +86,7 @@ The results of these analyses are shown in the table below:
     <td><em>Raghavendra et al. (2018)</em> [10]  <br>​ Deep convolution neural network for accurate diagnosis of glaucoma using digital fundus images <a href="https://doi.org/10.1016/j.ins.2018.01.051">Link</a></td>
     <td>CNN</td>
     <td>98.13%</td>
+    <td rowspan="3" style="color: red"><strong>88.8%</strong></td>
   </tr>
   <tr>
     <td><em>Dias-Pinto et al. (2019)</em> [11] <br>​ CNNs for automatic glaucoma assessment using fundus images: an extensive validation <a href="https://biomedical-engineering-online.biomedcentral.com/articles/10.1186/s12938-019-0649-y">Link</a></td>
@@ -105,6 +108,7 @@ The results of these analyses are shown in the table below:
     <td><em>Zhang et al. (2017)</em> [14] <br>​ Automatic cataract detection and grading using Deep Convolutional Neural Network <a href="https://doi.org/10.1109/ICNSC.2017.8000068">Link</a></td>
     <td>CNN</td>
     <td>93.52%</td>
+    <td rowspan="3" style="color: red"><strong>93.1%</strong></td>
   </tr>
   <tr>
     <td><em>Ran et al. (2018)</em>  [15]<br>​ Cataract Detection and Grading Based on Combination of Deep Convolutional Neural Network and Random Forests <a href="https://doi.org/10.1109/ICNIDC.2018.8525852">Link</a></td>
@@ -121,6 +125,7 @@ The results of these analyses are shown in the table below:
     <td><em>Mohsin Butt et al. (2019)</em> [17]<br> Multi-channel Convolutions Neural Network Based Diabetic Retinopathy Detection from Fundus Images <a href="https://doi.org/10.1016/j.procs.2019.12.110">Link</a></td>
     <td>CNN</td>
     <td>97.08%</td>
+    <td rowspan="3" style="color: red"><strong>96.4%</strong></td>
   </tr>
   <tr>
     <td><em>Li et al. (2019)</em> [18]​ <br> Computer-Assisted Diagnosis for Diabetic Retinopathy Based on Fundus Images Using Deep Convolutional Neural Network <a href="https://www.hindawi.com/journals/misy/2019/6142839/">Link</a></td>
@@ -138,15 +143,15 @@ The results of these analyses are shown in the table below:
 ## Data Description & Structure Analysis
 
 ### Content
-The images in the dataset, which we obtained from kaggle [6], are funduscopy images, which are divided into the following categories:
+The images in the dataset, which we obtained from kaggle [6], are funduscopy images, which are divided into the categories Normal, Glaucoma, Cataract and Diabetic Retinopathy. Each of these categories contains up to two images per patient (left and right eye). The following table shows the distribution of the data in the individual categories as well as the distribution of images of the left and right eye within these categories.
 
-* *Cataract:* 1038 Files​
+| Condition            | Files       | Patient IDs | Left   | Right  |
+|----------------------|-------------|-------------|--------|--------|
+| Normal               | 1074 Files  | xy PatIDs   | xy left| xy right|
+| Glaukoma             | 1007 Files  | xy PatIDs   | xy left| xy right|
+| Cataract             | 1038 Files  | xy PatIDs   | xy left| xy right|
+| Diabetic Retinopathy | 1098 Files  | xy PatIDs   | xy left| xy right|
 
-* *Diabetic Retinopathy:* 1098 Files​
-
-* *Glaukoma:* 1007 Files​
-
-* *Normal:* 1074 Files
 
 ### Structure
 
