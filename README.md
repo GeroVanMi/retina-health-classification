@@ -172,7 +172,8 @@ We used two different approaches when designing our model. For the **SimpleClass
 
 For the **DoubleClassifier**, we also used all available data, but taking the laterality into account. The classifier was no longer provided with the individual images, but with a patient ID to which 1 - maximum 2 images are assigned.
 
-The architecture modules are explained in detail below:
+The architecture of our models is based on the encoder part of the U-Net Architecture [20].
+
 ### SimpleClassifier
 
 1. **Convolutional Layer:** 
@@ -234,32 +235,34 @@ TODO
 
 [6] A. Basandrai, "Medical Scan Classification Dataset," Kaggle, 2023. [Online]. Available: https://www.kaggle.com/datasets/arjunbasandrai/medical-scan-classification-dataset. [Accessed: 16-May-2024].
 
-[7] I. A. Khan, FNU Asaduzzaman, and S. A. Fattah, "An Automatic Ocular Disease Detection Scheme from Enhanced Fundus Images Based on Ensembling Deep CNN Networks," in Proc. International Conference on Electrical and Computer Engineering (ICECE), 2020, [Online]. Available: https://ieeexplore.ieee.org/abstract/document/9393050. [Accessed: 16-May-2024]
+[7] I. A. Khan, FNU Asaduzzaman, and S. A. Fattah, "An Automatic Ocular Disease Detection Scheme from Enhanced Fundus Images Based on Ensembling Deep CNN Networks," in Proc. International Conference on Electrical and Computer Engineering (ICECE), 2020. doi: 10.1109/ICECE51571.2020.9393050.
 
-[8] P. Glaret subin and P. Muthukannan, "Optimized convolution neural network based multiple eye disease detection," Computers in Biology and Medicine, vol. 146, 2022. [Online]. Available: https://doi.org/10.1016/j.compbiomed.2022.105648. [Accessed: 16-May-2024].
+[8] P. Glaret subin and P. Muthukannan, "Optimized convolution neural network based multiple eye disease detection," Computers in Biology and Medicine, vol. 146, 2022. doi: 10.1016/j.compbiomed.2022.105648.
 
-[9] N. Gour and P. Khanna, "Multi-class multi-label ophthalmological disease detection using transfer learning based convolutional neural network," Biomedical Signal Processing and Control, vol. 66, 2021. [Online]. Available: https://doi.org/10.1016/j.bspc.2020.102329. [Accessed: 16-May-2024].
+[9] N. Gour and P. Khanna, "Multi-class multi-label ophthalmological disease detection using transfer learning based convolutional neural network," Biomedical Signal Processing and Control, vol. 66, 2021. doi: 10.1016/j.bspc.2020.102329.
 
-[10] U. Raghavendra, H. Fujita b, S. V Bhandary, A. Gudigar, T. Jen Hong, U. Rajendra Acharya, "Deep convolution neural network for accurate diagnosis of glaucoma using digital fundus images," Information Sciences, vol. 441, pp. 41-49, 2018. [Online]. Available: https://doi.org/10.1016/j.ins.2018.01.051. [Accessed: 16-May-2024].
+[10] U. Raghavendra, H. Fujita b, S. V Bhandary, A. Gudigar, T. Jen Hong, U. Rajendra Acharya, "Deep convolution neural network for accurate diagnosis of glaucoma using digital fundus images," Information Sciences, vol. 441, pp. 41-49, 2018. doi: 10.1016/j.ins.2018.01.051.
 
-[11] A. Diaz-Pinto, S. Morales, V. Naranjo, T. Köhler, J. M. Mossi, and A. Navea, "CNNs for automatic glaucoma assessment using fundus images: An extensive validation," BioMedical Engineering OnLine, vol. 18, no. 29, Mar. 2019. [Online]. Available: https://biomedical-engineering-online.biomedcentral.com/articles/10.1186/s12938-019-0649-y. [Accessed: 16-May-2024].
+[11] A. Diaz-Pinto, S. Morales, V. Naranjo, T. Köhler, J. M. Mossi, and A. Navea, "CNNs for automatic glaucoma assessment using fundus images: An extensive validation," BioMedical Engineering OnLine, vol. 18, no. 29, Mar. 2019. doi: 10.1186/s12938-019-0649-y.
 
-[12] S.J. Grace Shoba, A. Brintha Therese, "Detection of glaucoma disease in fundus images based on morphological operation and finite element method," Biomedical Signal Processing and Control, vol. 62, 2020. [Online]. Available: https://doi.org/10.1016/j.bspc.2020.101986. [Accessed: 16-May-2024].
+[12] S.J. Grace Shoba, A. Brintha Therese, "Detection of glaucoma disease in fundus images based on morphological operation and finite element method," Biomedical Signal Processing and Control, vol. 62, 2020. doi: 10.1016/j.bspc.2020.101986.
 
-[13] A. Septiarini, D. M. Khairina, A. H. Kridalaksana, and H. Hamdani, "Automatic Glaucoma Detection Method Applying a Statistical Approach to Fundus Images," Healthcare Informatics Research, vol. 24, no. 1, pp. 53-60, Jan. 2018. [Online]. Available: https://e-hir.org/journal/view.php?id=10.4258/hir.2018.24.1.53. [Accessed: 16-May-2024].
+[13] A. Septiarini, D. M. Khairina, A. H. Kridalaksana, and H. Hamdani, "Automatic Glaucoma Detection Method Applying a Statistical Approach to Fundus Images," Healthcare Informatics Research, vol. 24, no. 1, pp. 53-60, Jan. 2018. doi: 10.4258/hir.2018.24.1.53.
 
-[14] Linglin Zhang et al., "Automatic cataract detection and grading using Deep Convolutional Neural Network," 2017 IEEE 14th International Conference on Networking, Sensing and Control (ICNSC), Calabria, pp. 60-65, 2017. [Online]. Available: https://doi.org/10.1109/ICNSC.2017.8000068. [Accessed: 16-May-2024].
+[14] Linglin Zhang et al., "Automatic cataract detection and grading using Deep Convolutional Neural Network," 2017 IEEE 14th International Conference on Networking, Sensing and Control (ICNSC), Calabria, pp. 60-65, 2017. doi: 10.1109/ICNSC.2017.8000068.
 
-[15] J. Ran, K. Niu, Z. He, H. Zhang and H. Song, "Cataract Detection and Grading Based on Combination of Deep Convolutional Neural Network and Random Forests," 2018 International Conference on Network Infrastructure and Digital Content (IC-NIDC), Guiyang, China, pp. 155-159, 2018. [Online]. Available: https://doi.org/10.1109/ICNIDC.2018.8525852 [Accessed: 16-May-2024].
+[15] J. Ran, K. Niu, Z. He, H. Zhang and H. Song, "Cataract Detection and Grading Based on Combination of Deep Convolutional Neural Network and Random Forests," 2018 International Conference on Network Infrastructure and Digital Content (IC-NIDC), Guiyang, China, pp. 155-159, 2018. doi: 10.1109/ICNIDC.2018.8525852.
 
-[16] Y. Zhou, G. Li and H. Li, "Automatic Cataract Classification Using Deep Neural Network With Discrete State Transition," in IEEE Transactions on Medical Imaging, vol. 39, no. 2, pp. 436-446, Feb. 2020. [Online]. Available: https://doi.org/10.1109/TMI.2019.2928229. [Accessed: 16-May-2024].
+[16] Y. Zhou, G. Li and H. Li, "Automatic Cataract Classification Using Deep Neural Network With Discrete State Transition," in IEEE Transactions on Medical Imaging, vol. 39, no. 2, pp. 436-446, Feb. 2020. doi: 10.1109/TMI.2019.2928229.
 
 
-[17] M. Mohsin Butt, G. Latif, D.N.F. Awang Iskandar, J. Alghazo, A. H. Khan, "Multi-channel Convolutions Neural Network Based Diabetic Retinopathy Detection from Fundus Images," Procedia Computer Science, vol. 163, pp. 283-291, 2019. [Online]. Available: https://doi.org/10.1016/j.procs.2019.12.110. [Accessed: 16-May-2024].
+[17] M. Mohsin Butt, G. Latif, D.N.F. Awang Iskandar, J. Alghazo, A. H. Khan, "Multi-channel Convolutions Neural Network Based Diabetic Retinopathy Detection from Fundus Images," Procedia Computer Science, vol. 163, pp. 283-291, 2019. doi: 10.1016/j.procs.2019.12.110.
 
-[18] Y.-H. Li, N.-N. Yeh, S.-J. Chen, and Y.-C. Chung, "Computer-Assisted Diagnosis for Diabetic Retinopathy Based on Fundus Images Using Deep Convolutional Neural Network," Mobile Information Systems, vol. 2019, Jan. 2019. [Online]. Available: https://www.hindawi.com/journals/misy/2019/6142839/. [Accessed: 16-May-2024].
+[18] Y.-H. Li, N.-N. Yeh, S.-J. Chen, and Y.-C. Chung, "Computer-Assisted Diagnosis for Diabetic Retinopathy Based on Fundus Images Using Deep Convolutional Neural Network," Mobile Information Systems, vol. 2019, Jan. 2019. doi: 10.1155/2019/6142839
 
-[19] E. Saleh, J. Błaszczyński, A. Moreno, A. Valls, P. Romero-Aroca, S. de la Riva-Fernández, R. Słowiński, "Learning ensemble classifiers for diabetic retinopathy assessment," Artificial Intelligence in Medicine, vol. 85, 2018. [Online]. Available: https://doi.org/10.1016/j.artmed.2017.09.006. [Accessed: 16-May-2024].
+[19] E. Saleh, J. Błaszczyński, A. Moreno, A. Valls, P. Romero-Aroca, S. de la Riva-Fernández, R. Słowiński, "Learning ensemble classifiers for diabetic retinopathy assessment," Artificial Intelligence in Medicine, vol. 85, 2018. doi: 10.1016/j.artmed.2017.09.006.
+
+[20] O. Ronneberger, P. Fischer, und T. Brox, „U-Net: Convolutional Networks for Biomedical Image Segmentation,” International Conference on Medical Image Computing and Computer-Assisted Intervention, vol. abs/1505.04597, 2015. doi: 10.1007/978-3-319-24574-4_28..
 
 
 
