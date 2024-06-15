@@ -97,33 +97,45 @@ The CNN architectures of both models are based on the encoder part of the U-Net 
 
 1. **Convolutional Layer:**
 
-- 6 layers with 2 convolutions, resulting in a total of 12 convolutions
-- This increases the number of channels after each convolution layer.
-- The increase in the number of channels corresponds to x2: 3 (RGB) => 16 => 32 => 64 => 128 => 256 => 512
+- The classifier consists of 6 layers, each comprising 2 convolutional layers, resulting in a total of 12 convolutional layers.
+- The number of channels is doubled after each convolutional layer: from 3 (RGB) to 16, 32, 64, 128, 256 and finally 512.
 
 2. **Pooling Layer:**
 
-- Max pooling is carried out after each convolution layer. This means that deeper layers have a larger receptive field and therefore contain more of the original image.
-- After the first two convolution layers, max pooling is performed with kernel size 4. This reduces the size of the image so that the training phase does not take too long and the images fit into memory.
-- After the other layers, max pooling is performed with kernel size 2 so that not too much information is lost.
+- After each convolution, a max-pooling operation is performed to reduce the spatial dimension and lower the computational cost.
+- After the first two convolution layers, max-pooling with a kernel size of 4x4 is applied to quickly reduce the image size, thus shortening the training time and reducing memory requirements.
+- After the further convolution layers, max-pooling with a kernel size of 2x2 is performed to further condense the representations without losing too much information.
 
 3. **Fully Connected Layer:**
 
-- Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
+- The extracted features are then fed into a fully connected neural network:
+  - 8192 input neurons
+  - 4064 neurons in the first hidden layer
+  - 256 neurons in the second hidden layer
+  - 4 output neurons for classification
 
 ### DoubleEyeClassifier
 
-1. **Convolutional Layer:**
+The DoubleEyeClassifier takes two images as input. It consists of two separate feature extractors that extract features from each input image. The extracted features are then merged and fed into a neural network.
 
-- TODO
+1. **Left Feature Extractor and Right Feature Extractor:**
+  - **Convolutional Layer:** 6 layers with 2 convolutional layers each, 12 convolutional layers in total Number of channels increases as follows: 3 (RGB)to 16, 32, 64, 128, 256, 512 and finally 1024.
 
-2. **Pooling Layer:**
+  - **Pooling layer:** After the first two layers: Max pooling with kernel size 4x4; After the following layers: Max pooling with kernel size 2x2
 
-- TODO
+  - **Fully Connected Layer:** Flattening layer for converting the features into a one-dimensional vector
+
+
 
 3. **Fully Connected Layer:**
 
-- Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
+- The extracted features are then fed into a fully connected neural network:
+  - 8192 input neurons
+  - 2048 neurons in the first hidden layer
+  - 1024 neurons in the second hidden layer
+  - 512 neurons in the third hidden layer
+  - 256 neurons in the fourth hidden layer
+  - 4 output neurons for classification
 
 ## Model Training
 
