@@ -68,11 +68,11 @@ In order to prepare the images for CNN training, several preprocessing steps are
 
 - All images have at least a resolution of 512 x 512 pixels. Those that are larger will be downsized to 512 x 512.
 
-2. **Empty Images:**
+2. **Empty Images**
 
 - For patients with only one image, an empty second image is generated consisting of zeros in all pixels.
 
-3. **Creating 5 Folds:**
+3. **Creating 5 Folds**
 
 - For cross-validation, five folds are created to be used for cross-validation.
 
