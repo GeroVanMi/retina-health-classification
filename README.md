@@ -6,6 +6,8 @@
 
 #### June 17, 2024
 
+[Slides](powerpoint.pdf)
+
 ## ![Titelbild](img/title_img.jpeg) [1]
 
 ## Introduction
@@ -66,11 +68,11 @@ In order to prepare the images for CNN training, several preprocessing steps are
 
 - All images have at least a resolution of 512 x 512 pixels. Those that are larger will be downsized to 512 x 512.
 
-2. **Empty Images**
+2. **Empty Images:**
 
 - For patients with only one image, an empty second image is generated consisting of zeros in all pixels.
 
-3. **Creating 5 Folds**
+3. **Creating 5 Folds:**
 
 - For cross-validation, five folds are created to be used for cross-validation.
 
@@ -159,10 +161,6 @@ The classification indices `(CLASS_INDICES)` for different categories of our dat
 
 Additional dynamic properties such as `RUN_NAME`, `NUMBER_OF_EPOCH` and `BATCH_SIZE` adapt depending on the mode `(DEV_MODE)` and the number of GPUs used `(NUMBER_OF_GPUS)`
 
-### Training Steps
-
-TODO
-
 ### Model Evaluation Metric
 
 - The performance of the model is evaluated with Multiclass Accuracy (from Torchmetrics), as the four classes are sufficiently balanced.
@@ -174,6 +172,7 @@ TODO
 ![Training Loss](img/training_loss.png)
 
 Both approaches achieve similar results, though the Single Eye Classifier was not cross-validated on multiple folds, due to time constraints.
+The Double Eye Classifier did not improve or worsen the results by much and the standard deviation is shown as a shaded area in the figure above.
 
 | Model                 | Validation Accuracy | Training Loss   |
 | --------------------- | ------------------- | --------------- |
@@ -292,10 +291,6 @@ The results of these analyses are shown in the table below:
     <td>72.84%</td>
   </tr>
 </table>
-
-## Discussion
-
-TODO
 
 ## Sources
 
