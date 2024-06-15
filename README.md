@@ -170,8 +170,8 @@ TODO
 
 ## Results
 
-![Validation Accuracy](img/validation_accuracy.jpeg)
-![Training Loss](img/validation_accuracy.jpeg)
+![Validation Accuracy](img/validation_accuracy.png)
+![Training Loss](img/validation_accuracy.png)
 
 Both approaches achieve similar results, though the Single Eye Classifier was not cross-validated on multiple folds, due to time constraints.
 
