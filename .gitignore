@@ -10,6 +10,7 @@ data/
 models/
 wandb/
 artifacts/
+keys/
 
 # Terraform
 terraform*

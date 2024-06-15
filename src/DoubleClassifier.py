@@ -7,15 +7,16 @@ from utils.layers import double_convolution_layer
 class DoubleClassifier(Module):
     """
     A double classifier model that takes two images as input and outputs a classification.
-    
+
     The model consists of two feature extractors that extract features from the input images.
     The output of the feature extractors is concatenated and passed to a classifier that outputs the classification.
-    
+
     The model consists of the following layers:
     - A left feature extractor that extracts features from the left eye image.
     - A right feature extractor that extracts features from the right eye image.
     - A classifier that classifies the concatenated features.
     """
+
     def __init__(self):
         super().__init__()
         self.left_feature_extractor = Sequential(
@@ -30,6 +31,8 @@ class DoubleClassifier(Module):
             double_convolution_layer(128, 256),
             MaxPool2d(2),
             double_convolution_layer(256, 512),
+            MaxPool2d(2),
+            double_convolution_layer(512, 1024),
             Flatten(),
         )
 
@@ -45,11 +48,13 @@ class DoubleClassifier(Module):
             double_convolution_layer(128, 256),
             MaxPool2d(2),
             double_convolution_layer(256, 512),
+            MaxPool2d(2),
+            double_convolution_layer(512, 1024),
             Flatten(),
         )
 
         self.classifier = Sequential(
-            Linear(4096, 2048),
+            Linear(8192, 2048),
             ReLU(),
             Linear(2048, 1024),
             ReLU(),
@@ -69,4 +74,4 @@ class DoubleClassifier(Module):
         """
         left_features = self.left_feature_extractor(left)
         right_features = self.right_feature_extractor(right)
-        return self.classifier(torch.cat((left_features, right_features), axis=1))
+        return self.classifier(torch.cat((left_features, right_features), axis=1))  # type: ignore (torch.cat DOES exist)

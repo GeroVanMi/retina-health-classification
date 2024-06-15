@@ -1,4 +1,8 @@
+from time import time
+
+import numpy as np
 import torch
+from sklearn.model_selection import KFold
 from torch.nn import CrossEntropyLoss, Module
 from torch.optim import Optimizer
 from torch.optim.lr_scheduler import ReduceLROnPlateau
@@ -10,6 +14,7 @@ from DoubleClassifier import DoubleClassifier
 from pipeline.evaluate import evaluate_epoch
 from pipeline.train import train_epoch
 from utils.data import create_train_validation_loaders, stop_if_data_is_missing
+from utils.EyesDataset import EyesDataset
 from utils.model import initialize_model, save_torch_model
 from utils.quality_of_life import preflight_check
 
@@ -19,9 +24,9 @@ config = Configuration()
 def run_experiment():
     """
     Run the experiment as configured in the Configuration class.
-    
+
     This function is the main entry point for the training pipeline.
-    
+
     It will:
     - Load the data
     - Initialize the model, loss function and optimizer
@@ -47,10 +52,32 @@ def run_experiment():
 
     # Only initalize W&B after a successful preflight_check
     # to avoid polluting the project with killed runs.
-    wandb.init(
+
+    k_fold = KFold(n_splits=config.K_FOLDS, shuffle=True)
+    dataset = EyesDataset(config.DATA_PATH)
+    start_time = int(time())
+    for fold, (train_indices, validation_indices) in enumerate(k_fold.split(dataset)):
+        train_k_fold(
+            fold, dataset, train_indices, validation_indices, device, start_time
+        )
+
+
+def train_k_fold(
+    fold_number: int,
+    dataset: EyesDataset,
+    train_indices: np.ndarray,
+    validation_indices: np.ndarray,
+    device: str,
+    start_time: int,
+):
+    """
+    Trains a single fold in the k-fold crossvalidation.
+    """
+    k_fold_run = wandb.init(
         project=config.PROJECT_NAME,
         entity=config.ENTITY_NAME,
-        name=config.RUN_NAME,
+        name=f"fold_{fold_number + 1} {config.RUN_NAME}",
+        group=f"{config.RUN_NAME} {start_time}",
         config={
             "learning_rate": config.LEARNING_RATE,
             "learning_rate_factor": config.LEARNING_RATE_FACTOR,
@@ -60,12 +87,15 @@ def run_experiment():
             "dataset": config.DATASET_NAME,
             "epochs": config.NUMBER_OF_EPOCHS,
             "dev_mode": config.DEV_MODE,
+            "k-fold": fold_number,
         },
     )
-
     # Load Data and Initialize Model, Loss Function & Optimizer
     train_loader, validation_loader = create_train_validation_loaders(
-        config.DATA_PATH, config.BATCH_SIZE
+        dataset,
+        train_indices,
+        validation_indices,
+        config.BATCH_SIZE,
     )
     model = initialize_model(DoubleClassifier, device)
 
@@ -76,6 +106,7 @@ def run_experiment():
         mode="min",
         factor=config.LEARNING_RATE_FACTOR,
         patience=config.LEARNING_RATE_EPOCH_PATIENCE,
+        min_lr=1e-5,
     )
 
     # Training Loop
@@ -97,6 +128,8 @@ def run_experiment():
     if not config.DEV_MODE:
         save_torch_model(model, config.MODEL_SAVE_PATH, config.ARCHITECTURE_NAME)
 
+    k_fold_run.finish()
+
 
 def train_for_one_epoch(
     model: Module,
@@ -116,7 +149,7 @@ def train_for_one_epoch(
     :param optimizer: The optimizer to use.
     :param scheduler: The learning rate scheduler to use.
     :param device: The device to use.
-    
+
     This function is responsible for training the model for one epoch.
     It will:
     - Run the training loop
@@ -140,7 +173,7 @@ def train_for_one_epoch(
             "Testing Loss": validation_loss,
             "Testing Accuracy": validation_accuracy,
             "Testing F1-Score": validation_f1,
-            "learning_rate": scheduler.get_last_lr(),
+            "current_lr": scheduler.get_last_lr()[-1],
         }
     )
 

@@ -51,6 +51,7 @@ class EyesDataset(Dataset):
     """
     The dataset for the eyes.
     """
+
     def __init__(self, image_directory: Path):
         """
         Initialize the dataset.
@@ -62,7 +63,7 @@ class EyesDataset(Dataset):
         self.patients = pd.concat(patients_per_class)
         self.image_transforms = torchvision.transforms.Compose(
             [
-                torchvision.transforms.Resize((256, 256)),
+                torchvision.transforms.Resize((512, 512)),
                 # torchvision.transforms.CenterCrop(512),
                 torchvision.transforms.ToTensor(),  # Convert the image to a pytorch tensor
             ]
@@ -88,7 +89,7 @@ class EyesDataset(Dataset):
             image2 = self.image_transforms(Image.open(patient.file2))
             class2 = patient.class_index
         else:
-            image2 = torch.zeros((3, 256, 256))
+            image2 = torch.zeros((3, 512, 512))
             class2 = config.CLASS_INDICES["Empty"]
 
         return (
@@ -100,7 +101,7 @@ class EyesDataset(Dataset):
 
 
 if __name__ == "__main__":
-    dataset = EyesDataset(config.DATA_PATH, None)
+    dataset = EyesDataset(config.DATA_PATH)
     data_loader = DataLoader(dataset, batch_size=1)
 
     for entry in data_loader:
