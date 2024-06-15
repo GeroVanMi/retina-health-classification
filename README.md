@@ -6,6 +6,8 @@
 
 #### June 17, 2024
 
+[Slides](powerpoint.pdf)
+
 ## ![Titelbild](img/title_img.jpeg) [1]
 
 ## Introduction
@@ -289,8 +291,6 @@ The results of these analyses are shown in the table below:
     <td>72.84%</td>
   </tr>
 </table>
-
-## Discussion
 
 ## Sources
 
