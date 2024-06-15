@@ -170,6 +170,7 @@ Additional dynamic properties such as `RUN_NAME`, `NUMBER_OF_EPOCH` and `BATCH_S
 ![Training Loss](img/training_loss.png)
 
 Both approaches achieve similar results, though the Single Eye Classifier was not cross-validated on multiple folds, due to time constraints.
+The Double Eye Classifier did not improve or worsen the results by much and the standard deviation is shown as a shaded area in the figure above.
 
 | Model                 | Validation Accuracy | Training Loss   |
 | --------------------- | ------------------- | --------------- |
@@ -290,8 +291,6 @@ The results of these analyses are shown in the table below:
 </table>
 
 ## Discussion
-
-TODO
 
 ## Sources
 
