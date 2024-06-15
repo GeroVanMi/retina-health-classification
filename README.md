@@ -66,11 +66,11 @@ In order to prepare the images for CNN training, several preprocessing steps are
 
 - All images have at least a resolution of 512 x 512 pixels. Those that are larger will be downsized to 512 x 512.
 
-2. **Empty Images**
+2. **Empty Images:**
 
 - For patients with only one image, an empty second image is generated consisting of zeros in all pixels.
 
-3. **Creating 5 Folds**
+3. **Creating 5 Folds:**
 
 - For cross-validation, five folds are created to be used for cross-validation.
 
@@ -158,10 +158,6 @@ Names and tags are defined for the experiment, the project, the entity, the arch
 The classification indices `(CLASS_INDICES)` for different categories of our dataset are also defined
 
 Additional dynamic properties such as `RUN_NAME`, `NUMBER_OF_EPOCH` and `BATCH_SIZE` adapt depending on the mode `(DEV_MODE)` and the number of GPUs used `(NUMBER_OF_GPUS)`
-
-### Training Steps
-
-TODO
 
 ### Model Evaluation Metric
 
