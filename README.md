@@ -8,16 +8,6 @@
 
 ## ![Titelbild](img/title_img.jpeg) [1]
 
-## Installation
-
-In order to run the code in this project create a virtual environment and install the package:
-
-```shell
-python3 -m venv venv
-source venv/bin/activate
-pip install -e .
-```
-
 ## Introduction
 
 Over two billion people worldwide suffer from vision loss due to an eye disease [2]. Some of these losses can be irreversible. Timely intervention or early detection can slow down the damage process, preserve vision and generally improve the quality of life of those affected.
@@ -55,44 +45,55 @@ Glaucoma is an eye disease in which the optic nerve is damaged, which in the wor
 
 Retinopathy is a disease of the retina, the light-sensitive tissue at the back of the eye. It is often associated with diabetes and can damage the blood vessels in the retina, which can result in vision loss or even blindness if left untreated [3].
 
-## Data Description
+## Data
 
-The images in the dataset, which we obtained from kaggle [5], are funduscopy images, which are divided into the categories **Normal**, **Glaucoma**, **Cataract** and **Diabetic Retinopathy**. Each of these categories contains up to two images per patient (left and right eye). The following table shows the distribution of the data in the individual categories as well as the distribution of images of the left and right eye within these categories.
+The images in the dataset, which we obtained from kaggle [5], are funduscopy images, which are divided into the categories **Normal**, **Glaucoma**, **Cataract** and **Diabetic Retinopathy**.
+Each of these categories contains up to two images per patient (left and right eye).
+The following table shows the distribution of the data in the individual categories. The "2 images" column describes how many of the patients contain two images, the remaining only have a single image.
 
-| Condition            | Files      | Patient IDs | Left | Right |
-| -------------------- | ---------- | ----------- | ---- | ----- |
-| Normal               | 1074 Files | xy          | xy   | xy    |
-| Glaukoma             | 1007 Files | xy          | xy   | xy    |
-| Cataract             | 1038 Files | xy          | xy   | xy    |
-| Diabetic Retinopathy | 1098 Files | xy          | xy   | xy    |
+| Condition            | Files      | Patient IDs | 2 Images |
+| -------------------- | ---------- | ----------- | -------- |
+| Normal               | 1074 Files | 605         | 469      |
+| Glaukoma             | 1007 Files | 699         | 302      |
+| Cataract             | 1038 Files | 693         | 312      |
+| Diabetic Retinopathy | 1098 Files | 549         | 549      |
 
-TODO: visualization?
-
-## Data Preprocessing
+#### Preprocessing
 
 In order to prepare the images for CNN training, several preprocessing steps are performed:
 
 1. **Resizing:**
 
-- The images are loaded first. Most of them are available with a resolution of 600 x 600 pixels. Those that are larger will be resized to 600 x 600. This ensures that no important information is lost and that the images are not distorted despite the reduction in resolution.
+- All images have at least a resolution of 512 x 512 pixels. Those that are larger will be downsized to 512 x 512.
 
-2. **Center Crop:**
+2. **Empty Images**
 
-- Since there are different formats in the images and they are spread over all four categories, all images will be cropped to 512 x 512 pixels after resizing.
+- For patients with only one image, an empty second image is generated consisting of zeros in all pixels.
+
+3. **Creating 5 Folds**
+
+- For cross-validation, five folds are created to be used for cross-validation.
 
 3. **Splitting data:**
 
-- The data is split into training and validation data with a split of 80% training data (3374 images) and 20% validation data (843 images).
+- For each fold, the data is split into training and validation sets with 80% training data (3374 images) and 20% validation data (843 images).
 
-## Model Architecture
+The images are not augmented in other ways (such as random rotations), since fundoscopies should always return images in the same orientation and style.
+However, some images are cropped and others are not. An approach to cropping all images in the same manner was evaluated, but did not result in any meaningful impact to performance
+and was therefore removed again.
 
-We used two different approaches when designing our model. For the **SimpleClassifier**, we applied all the data in the dataset without considering the laterality of the image.
+## Methods
 
-For the **DoubleClassifier**, we also used all available data, but taking the laterality into account. The classifier was no longer provided with the individual images, but with a patient ID to which 1 - maximum 2 images are assigned.
+We used two different approaches to this problem. Initially, all images were classified individually. However, this might leak information from the training data into the validation set.
+Instead, splitting the data by patients ensures that a model has never seen the other eye of a patient already during training, therefore improving the robustness of results.
 
-The architecture of our models is based on the encoder part of the U-Net Architecture [7].
+The `SingleEyeClassifier` is a simple convolutional neural network (CNN) used to classify all images individually without splitting by patients.
 
-### SimpleClassifier
+The `DoubleEyeClassifier` consists of two separate CNNs. These create feature maps which are then used by a shared fully connected neural network to make the final prediction per patient.
+
+The CNN architectures of both models are based on the encoder part of the U-Net Architecture, since it is a proven architecture for extracting features from medical images [7].
+
+### SingleEyeClassifier
 
 1. **Convolutional Layer:**
 
@@ -110,7 +111,7 @@ The architecture of our models is based on the encoder part of the U-Net Archite
 
 - Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
 
-### DoubleClassifier
+### DoubleEyeClassifier
 
 1. **Convolutional Layer:**
 
@@ -154,6 +155,16 @@ TODO
 ### SimpleClassifier
 
 ### DoubleClassifier
+
+## Installation
+
+In order to run the code in this project create a virtual environment and install the package:
+
+```shell
+python3 -m venv venv
+source venv/bin/activate
+pip install -e .
+```
 
 ## Related Work
 

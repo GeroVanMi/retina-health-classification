@@ -3,17 +3,18 @@ from torch.nn import Flatten, Linear, MaxPool2d, Module, ReLU, Sequential
 from utils.layers import double_convolution_layer
 
 
-class SimpleClassifier(Module):
-    """ 
+class SingleEyeClassifier(Module):
+    """
     A simple classifier model that takes an image as input and outputs a classification.
-    
+
     The model consists of a feature extractor that extracts features from the input image.
     The output of the feature extractor is passed to a classifier that outputs the classification.
-    
+
     The model consists of the following layers:
     - A feature extractor that extracts features from the input image.
     - A classifier that classifies the features.
     """
+
     def __init__(self):
         super().__init__()
         self.classifier = Sequential(

@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 
 import wandb
 from Configuration import Configuration
-from DoubleClassifier import DoubleClassifier
+from DoubleEyeClassifier import DoubleEyeClassifier
 from pipeline.evaluate import evaluate_epoch
 from pipeline.train import train_epoch
 from utils.data import create_train_validation_loaders, stop_if_data_is_missing
@@ -97,7 +97,7 @@ def train_k_fold(
         validation_indices,
         config.BATCH_SIZE,
     )
-    model = initialize_model(DoubleClassifier, device)
+    model = initialize_model(DoubleEyeClassifier, device)
 
     loss_function = CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=config.LEARNING_RATE)

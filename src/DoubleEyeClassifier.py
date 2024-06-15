@@ -4,7 +4,7 @@ from torch.nn import Flatten, Linear, MaxPool2d, Module, ReLU, Sequential
 from utils.layers import double_convolution_layer
 
 
-class DoubleClassifier(Module):
+class DoubleEyeClassifier(Module):
     """
     A double classifier model that takes two images as input and outputs a classification.
 
