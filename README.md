@@ -1,13 +1,17 @@
 # Retinal Imaging
-## Medical Image Classification
-### Data Science in Health
+
+## Data Science in Health
+
 #### Gérome Laurin Meyer | Rebekka von Wartburg
+
 #### June 17, 2024
-![Titelbild](img/title_img.jpeg) [1]
----
+
+## ![Titelbild](img/title_img.jpeg) [1]
 
 ## Installation
+
 In order to run the code in this project create a virtual environment and install the package:
+
 ```shell
 python3 -m venv venv
 source venv/bin/activate
@@ -15,69 +19,74 @@ pip install -e .
 ```
 
 ## Introduction
+
 Over two billion people worldwide suffer from vision loss due to an eye disease [2]. Some of these losses can be irreversible. Timely intervention or early detection can slow down the damage process, preserve vision and generally improve the quality of life of those affected.
 However, early detection of eye diseases is difficult, as they are often asymptomatic in the early stages. Ophthalmologists, specialists in the detection of eye diseases, use various diagnostic instruments to examine eye diseases, such as slit lamps, tonometry, perimetry, gonioscopy, pachymetry and fundoscopy.
 
 Funduscopy offers a simple and cost-effective screening solution. It uses a camera to illuminate the pupil of the eye, collects the reflected light from the retinal surface and captures it using imaging optics to create a retinal image on a detector screen. This creates a 2D image of the retina.
 
-In this project, the application of a Convolutional Neural Networks (CNNs) on funduscopy images for the classification of three major eye diseases - **cataract**, **glaucoma** and **retinopathy** - is investigated. These diseases are among the most common causes of visual impairment and blindness [3]. 
+In this project, the application of a Convolutional Neural Networks (CNNs) on funduscopy images for the classification of three major eye diseases - **cataract**, **glaucoma** and **retinopathy** - is investigated. These diseases are among the most common causes of visual impairment and blindness [3].
 
 **Normal Eye:**
 
-<img src="img/normal_eye.png" width="200px" height="200px"/>  <img src="img/2493_left.jpg" width="200px" height="200px"/>
+<img src="img/normal_eye.png" width="200px" height="200px"/> <img src="img/2493_left.jpg" width="200px" height="200px"/>
 [4][5]
 
-A healthy eye has a clear lens and an undamaged retina. This allows light to be focused correctly and ensures sharp vision. The normal function of the eye allows light to be directed through the lens onto the retina, where images are processed and sent to the brain via the optic nerve [3]. 
+A healthy eye has a clear lens and an undamaged retina. This allows light to be focused correctly and ensures sharp vision. The normal function of the eye allows light to be directed through the lens onto the retina, where images are processed and sent to the brain via the optic nerve [3].
 
 **Cataract:**
 
 <img src="img/cataract.png" width="200px" height="200px"/> | <img src="img/_42_9949990.jpg" width="200px" height="200px"/>
 [4][5]
 
-A cataract is a clouding of the lens that is often age-related, but can also occur with untreated diabetes mellitus and smoking. Symptoms include blurred vision (the eye loses the ability to focus), difficulty seeing at night and sensitivity to glare [3]. 
+A cataract is a clouding of the lens that is often age-related, but can also occur with untreated diabetes mellitus and smoking. Symptoms include blurred vision (the eye loses the ability to focus), difficulty seeing at night and sensitivity to glare [3].
 
 **Glaucoma:**
 
 <img src="img/glaucoma.png" width="200px" height="200px"/>| <img src="img/_74_2774709.jpg" width="200px" height="200px"/>
 [4][5]
 
-Glaucoma is an eye disease in which the optic nerve is damaged, which in the worst case can lead to blindness. Glaucoma typically causes no symptoms at first, which makes early diagnosis difficult. Over time, peripheral vision loss can occur, which often goes unnoticed until the damage is significant.  Risk factors include advanced age, a family history of glaucoma, elevated intraocular pressure [3].
+Glaucoma is an eye disease in which the optic nerve is damaged, which in the worst case can lead to blindness. Glaucoma typically causes no symptoms at first, which makes early diagnosis difficult. Over time, peripheral vision loss can occur, which often goes unnoticed until the damage is significant. Risk factors include advanced age, a family history of glaucoma, elevated intraocular pressure [3].
 
 **Retinopathy:**
 
 <img src="img/retinopathy.png" width="200px" height="200px"/> | <img src="img/10947_left.jpeg" width="200px" height="200px"/>
 [4][5]
 
-
 Retinopathy is a disease of the retina, the light-sensitive tissue at the back of the eye. It is often associated with diabetes and can damage the blood vessels in the retina, which can result in vision loss or even blindness if left untreated [3].
 
+## Data Description
 
-## Data Description 
 The images in the dataset, which we obtained from kaggle [5], are funduscopy images, which are divided into the categories **Normal**, **Glaucoma**, **Cataract** and **Diabetic Retinopathy**. Each of these categories contains up to two images per patient (left and right eye). The following table shows the distribution of the data in the individual categories as well as the distribution of images of the left and right eye within these categories.
 
-| Condition            | Files       | Patient IDs | Left   | Right  |
-|----------------------|-------------|-------------|--------|--------|
-| Normal               | 1074 Files  | xy  | xy | xy |
-| Glaukoma             | 1007 Files  | xy  | xy | xy |
-| Cataract             | 1038 Files  | xy  | xy | xy |
-| Diabetic Retinopathy | 1098 Files  | xy  | xy | xy |
+| Condition            | Files      | Patient IDs | Left | Right |
+| -------------------- | ---------- | ----------- | ---- | ----- |
+| Normal               | 1074 Files | xy          | xy   | xy    |
+| Glaukoma             | 1007 Files | xy          | xy   | xy    |
+| Cataract             | 1038 Files | xy          | xy   | xy    |
+| Diabetic Retinopathy | 1098 Files | xy          | xy   | xy    |
 
 TODO: visualization?
 
-
 ## Data Preprocessing
+
 In order to prepare the images for CNN training, several preprocessing steps are performed:
+
 1. **Resizing:**
-*  The images are loaded first. Most of them are available with a resolution of 600 x 600 pixels. Those that are larger will be resized to 600 x 600. This ensures that no important information is lost and that the images are not distorted despite the reduction in resolution.
+
+- The images are loaded first. Most of them are available with a resolution of 600 x 600 pixels. Those that are larger will be resized to 600 x 600. This ensures that no important information is lost and that the images are not distorted despite the reduction in resolution.
 
 2. **Center Crop:**
-* Since there are different formats in the images and they are spread over all four categories, all images will be cropped to 512 x 512 pixels after resizing.
+
+- Since there are different formats in the images and they are spread over all four categories, all images will be cropped to 512 x 512 pixels after resizing.
 
 3. **Splitting data:**
-* The data is split into training and validation data with a split of 80% training data (3374 images) and 20% validation data (843 images).
+
+- The data is split into training and validation data with a split of 80% training data (3374 images) and 20% validation data (843 images).
 
 ## Model Architecture
-We used two different approaches when designing our model. For the **SimpleClassifier**, we applied all the data in the dataset without considering the laterality of the image. 
+
+We used two different approaches when designing our model. For the **SimpleClassifier**, we applied all the data in the dataset without considering the laterality of the image.
 
 For the **DoubleClassifier**, we also used all available data, but taking the laterality into account. The classifier was no longer provided with the individual images, but with a patient ID to which 1 - maximum 2 images are assigned.
 
@@ -85,33 +94,42 @@ The architecture of our models is based on the encoder part of the U-Net Archite
 
 ### SimpleClassifier
 
-1. **Convolutional Layer:** 
-* 6 layers with 2 convolutions, resulting in a total of 12 convolutions
-* This increases the number of channels after each convolution layer.
-* The increase in the number of channels corresponds to x2: 3 (RGB) => 16 => 32 => 64 => 128 => 256 => 512
+1. **Convolutional Layer:**
+
+- 6 layers with 2 convolutions, resulting in a total of 12 convolutions
+- This increases the number of channels after each convolution layer.
+- The increase in the number of channels corresponds to x2: 3 (RGB) => 16 => 32 => 64 => 128 => 256 => 512
 
 2. **Pooling Layer:**
-* Max pooling is carried out after each convolution layer. This means that deeper layers have a larger receptive field and therefore contain more of the original image.
-* After the first two convolution layers, max pooling is performed with kernel size 4. This reduces the size of the image so that the training phase does not take too long and the images fit into memory.
-* After the other layers, max pooling is performed with kernel size 2 so that not too much information is lost.
+
+- Max pooling is carried out after each convolution layer. This means that deeper layers have a larger receptive field and therefore contain more of the original image.
+- After the first two convolution layers, max pooling is performed with kernel size 4. This reduces the size of the image so that the training phase does not take too long and the images fit into memory.
+- After the other layers, max pooling is performed with kernel size 2 so that not too much information is lost.
 
 3. **Fully Connected Layer:**
-* Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
+
+- Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
 
 ### DoubleClassifier
-1. **Convolutional Layer:** 
-* TODO
+
+1. **Convolutional Layer:**
+
+- TODO
 
 2. **Pooling Layer:**
-* TODO
+
+- TODO
 
 3. **Fully Connected Layer:**
-* Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
+
+- Finally, the input is passed to a Fully Connected Neural Network with 8192 Input Neurons => 4064 Hidden => 256 Hidden => 4 Output
 
 ## Model Training
+
 The configurations made to train and evaluate our model are described in **Configurations**, while training our model is described in **Training Steps** and its evaluation in **Model Evaluation Metric**.
 
 ### Configurations
+
 The configurations that we need for our model are defined in `Configuration.py`. In development mode `(DEV_MODE)` 3 epochs are trained, while in effective training 20 epochs are performed.
 
 The training hyperparameters include 20 epochs for training ` (NUMBER_OF_EPOCHS_TRAINING)` and 3 epochs for testing `(DEV_MODE)``(NUMBER_OF_EPOCHS_TESTING)`, as well as batch sizes of 110 for training `(BATCH_SIZE_TRAINING)` and 3 for testing `(BATCH_SIZE_TESTING)`. When using multiple GPUs, a batch size of 512 `(MULTI_GPU_BATCH_SIZE)` is used. The learning rate `(LEARNING_RATE)` is 1e-4 and is reduced by a factor of 0.1 `(LEARNING_RATE_FACTOR)` after 2 epochs without optimization `(LEARNING_RATE_EPOCH_PATIENCE)`.
@@ -123,21 +141,22 @@ The classification indices `(CLASS_INDICES)` for different categories of our dat
 Additional dynamic properties such as `RUN_NAME`, `NUMBER_OF_EPOCH` and `BATCH_SIZE` adapt depending on the mode `(DEV_MODE)` and the number of GPUs used `(NUMBER_OF_GPUS)`
 
 ### Training Steps
+
 TODO
 
 ### Model Evaluation Metric
-* The performance of the model is evaluated with Multiclass Accuracy (from Torchmetrics), as the four classes are sufficiently balanced.
-* Finally, the model is saved on Weights & Biases so that it can be used for predictions of unlabeled images.
+
+- The performance of the model is evaluated with Multiclass Accuracy (from Torchmetrics), as the four classes are sufficiently balanced.
+- Finally, the model is saved on Weights & Biases so that it can be used for predictions of unlabeled images.
 
 ## Results
 
 ### SimpleClassifier
 
-
-
 ### DoubleClassifier
 
 ## Related Work
+
 To address the global prevalence of eye diseases, numerous studies have investigated the classification of different eye diseases [6]. In order to make our developed best CNN comparable with existing studies, we used studies that perform multiclassification predictions as well as those that focus specifically on individual eye diseases. In addition, we also included approaches that are not based on CNNs.
 
 The results of these analyses are shown in the table below:
@@ -225,14 +244,12 @@ The results of these analyses are shown in the table below:
   </tr>
 </table>
 
-
-
 ## Discussion
+
 TODO
 
-
-
 ## Sources
+
 [1] Massachusetts Eye and Ear Infirmary, 'Unlocking the Future of Health: Predicting Disease With Retinal Imaging and Genetics,' SciTechDaily, 07-Feb-2024. [Online]. Available: https://scitechdaily.com/unlocking-the-future-of-health-predicting-disease-with-retinal-imaging-and-genetics/. [Accessed: 16-May-2024].
 
 [2] World Health Organization, 'Blindness and vision impairment,' WHO, [Online]. Available: https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment. [Accessed: 16-May-2024].
@@ -272,12 +289,3 @@ TODO
 [19] Y.-H. Li, N.-N. Yeh, S.-J. Chen, and Y.-C. Chung, "Computer-Assisted Diagnosis for Diabetic Retinopathy Based on Fundus Images Using Deep Convolutional Neural Network," Mobile Information Systems, vol. 2019, Jan. 2019. doi: 10.1155/2019/6142839
 
 [20] E. Saleh, J. Błaszczyński, A. Moreno, A. Valls, P. Romero-Aroca, S. de la Riva-Fernández, R. Słowiński, "Learning ensemble classifiers for diabetic retinopathy assessment," Artificial Intelligence in Medicine, vol. 85, 2018. doi: 10.1016/j.artmed.2017.09.006.
-
-
-
-
-
-
-
-
-
