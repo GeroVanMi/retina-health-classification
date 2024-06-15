@@ -113,13 +113,13 @@ The CNN architectures of both models are based on the encoder part of the U-Net 
 
 ### DoubleEyeClassifier
 
-1. **Convolutional Layer:**
+1. **2 Convolutional Layers:**
 
-- TODO
+- Similar to the `SingleEyeClassifier`, but there are now two processing each eye of the patient separately.
 
-2. **Pooling Layer:**
+2. **Concatination:**
 
-- TODO
+- The resulting feature maps of the feature extractors are flattened and merged to be processed by the fully connected layer.
 
 3. **Fully Connected Layer:**
 
@@ -131,7 +131,7 @@ The configurations made to train and evaluate our model are described in **Confi
 
 ### Configurations
 
-The configurations that we need for our model are defined in `Configuration.py`. In development mode `(DEV_MODE)` 3 epochs are trained, while in effective training 20 epochs are performed.
+The configurations that are used for training are defined in `Configuration.py`. In development mode `(DEV_MODE)` 3 epochs are trained, while in effective training 20 epochs are performed.
 
 The training hyperparameters include 20 epochs for training ` (NUMBER_OF_EPOCHS_TRAINING)` and 3 epochs for testing `(DEV_MODE)``(NUMBER_OF_EPOCHS_TESTING)`, as well as batch sizes of 110 for training `(BATCH_SIZE_TRAINING)` and 3 for testing `(BATCH_SIZE_TESTING)`. When using multiple GPUs, a batch size of 512 `(MULTI_GPU_BATCH_SIZE)` is used. The learning rate `(LEARNING_RATE)` is 1e-4 and is reduced by a factor of 0.1 `(LEARNING_RATE_FACTOR)` after 2 epochs without optimization `(LEARNING_RATE_EPOCH_PATIENCE)`.
 
@@ -152,9 +152,15 @@ TODO
 
 ## Results
 
-### SimpleClassifier
+![Validation Accuracy](img/validation_accuracy.jpeg)
+![Training Loss](img/validation_accuracy.jpeg)
 
-### DoubleClassifier
+Both approaches achieve similar results, though the Single Eye Classifier was not cross-validated on multiple folds, due to time constraints.
+
+| Model                 | Validation Accuracy | Training Loss   |
+| --------------------- | ------------------- | --------------- |
+| Single Eye Classifier | 0.8577              | 0.1082          |
+| Double Eye Classifier | 0.8386 ± 0.0186     | 0.0079 ± 0.0025 |
 
 ## Installation
 
@@ -164,6 +170,20 @@ In order to run the code in this project create a virtual environment and instal
 python3 -m venv venv
 source venv/bin/activate
 pip install -e .
+```
+
+The implementation also contains a `Dockerfile`, which can be used on machines with NVIDIA GPUs for training and supports multi-GPU training.
+To use this, run the commands below.
+
+You will need to have docker and Nvidia's container-toolkit installed:
+
+1. https://docs.docker.com/engine/install/
+2. https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+
+```shell
+docker build -t retina-classifier-trainer:latest .
+# Remove the --gpus=all flag if you want to test training on CPU:
+docker run -it --gpus=all retina-classifier-trainer
 ```
 
 ## Related Work
